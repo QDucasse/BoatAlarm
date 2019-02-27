@@ -1,10 +1,10 @@
-#BoatAlarm
+# BoatAlarm
 
 ## Authors:
 - Quentin DUCASSE
 - Guillaume LE BOUCHER
 - Mahmoud SOUAFYAN
-- Geaorges TANOS
+- Georges TANOS
 
 ## Mise en place Github
 1. Obtention du dossier sur votre compte et machine
