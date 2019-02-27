@@ -11,7 +11,7 @@
 Obtenir une copie du projet sur votre compte github : `fork`.
 Pour créer une copie locale du projet git sur votre ordinateur :
 ```bash
-$ git clone https://github.com/NomDeCompte/Projet-DAC
+$ git clone https://github.com/NomDeCompte/BoatAlarm
 ```
 
 2. Dès que vous modifiez un élément de votre dossier git, une `working copy` est créée. 
@@ -38,7 +38,7 @@ Pour proposer votre modification au dossier GitHub original, il faut effectuer u
 3. Maintenant, pour mettre à jour votre copie virtuelle et locale en cas de modification du dossier initial (celui que vous avez `fork`) il faut utiliser un `remote`. Le `remote` est un pointeur vers un le dossier git voulu :
 Mise en place du `remote` appelé `upstream` par convention :
 ```bash
-$ git remote add upstream https://github.com/bedinke/Projet-DAC
+$ git remote add upstream https://github.com/QDucasse/BoatAlarm
 ```
 Mise à jour de votre dossier local et virtuel :
 ```bash
