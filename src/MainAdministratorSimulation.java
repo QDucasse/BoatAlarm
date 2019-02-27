@@ -1,5 +1,5 @@
 
-public class Main {
+public class MainAdministratorSimulation {
 	private static Administrator admin;
 	
 	public static Administrator getAdmin() {
