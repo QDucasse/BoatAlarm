@@ -4,7 +4,7 @@
 - Quentin DUCASSE
 - Guillaume LE BOUCHER
 - Mahmoud SOUAFYAN
-- Georges TANOS
+- Georges TANIOS
 
 ## Mise en place Github
 1. Obtention du dossier sur votre compte et machine
