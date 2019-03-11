@@ -1,6 +1,9 @@
 package clientServer;
 import java.io.*;
 import java.net.*;
+import java.util.List;
+
+import users.Subscriber;
 
 
 public class TCPServer extends Thread{
@@ -16,6 +19,8 @@ public class TCPServer extends Thread{
 	   
 	private int portNumber;
 	
+	private List<Subscriber> subscriberList;
+	
 	//==================
 	//Constructors
 	
@@ -24,6 +29,49 @@ public class TCPServer extends Thread{
 		maxConnect = 10;
 	} 
 
+	//==================
+	//Setters & Getters
+	
+	public static int getConnectionNumber() {
+		return connectionNumber;
+	}
+
+	public static void setConnectionNumber(int connectionNumber) {
+		TCPServer.connectionNumber = connectionNumber;
+	}
+
+	public int getMaxConnect() {
+		return maxConnect;
+	}
+
+	public void setMaxConnect(int maxConnect) {
+		this.maxConnect = maxConnect;
+	}
+
+	public Socket getClientSocket() {
+		return clientSocket;
+	}
+
+	public void setClientSocket(Socket clientSocket) {
+		this.clientSocket = clientSocket;
+	}
+
+	public int getPortNumber() {
+		return portNumber;
+	}
+
+	public void setPortNumber(int portNumber) {
+		this.portNumber = portNumber;
+	}
+
+	public List<Subscriber> getSubscriberList() {
+		return subscriberList;
+	}
+
+	public void setSubscriberList(List<Subscriber> subscriberList) {
+		this.subscriberList = subscriberList;
+	} 
+	
 	//==================
 	//Methods
 	
@@ -64,9 +112,9 @@ public class TCPServer extends Thread{
 			System.out.println("Could not close socket: " + serverSocket.toString());
 		}
 
-	} 
-	
-		
+	}
+
+
 
 }
 
