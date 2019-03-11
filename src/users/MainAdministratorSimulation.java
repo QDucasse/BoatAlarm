@@ -12,6 +12,7 @@ public class MainAdministratorSimulation {
 			admin = new Administrator("Tanios");
 			admin.simulation();
 			//Test Github
+			//Test 2
 	   }
 	
 }
