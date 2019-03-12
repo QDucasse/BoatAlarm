@@ -1,5 +1,11 @@
 package server;
 import java.util.List;
+
+import protocols.AdminProtocol;
+import protocols.StateProtocol;
+import protocols.UserProtocol;
+import protocols.TestProtocol;
+
 import java.util.ArrayList;
 import users.Subscriber;
 
@@ -7,14 +13,27 @@ public class CentralSystem implements IContext {
 	//==================
 	//Instance Variables
 	
-	private int port = 6666;
-	private int bport = 6667;
-	public ArrayList<TCPServer> serveurs = new ArrayList<TCPServer>();
+	private int main_port  = 6666;
+	private int boat_port  = 6667;
+	private int user_port  = 6668;
+	private int admin_port = 6669;
+	public List<TCPServer> servers = new ArrayList<TCPServer>();
 	List<Subscriber> subscriberList=new ArrayList<Subscriber>();
 	
 	//==================
 	//Constructors
-		
+	
+	public CentralSystem(List<Subscriber> subscriberList) {	
+		this.subscriberList=subscriberList;
+		servers.add(new TCPServer(this, new TestProtocol() , main_port ));
+		servers.add(new TCPServer(this, new UserProtocol() , user_port ));
+		servers.add(new TCPServer(this, new AdminProtocol() , admin_port ));
+		servers.add(new TCPServer(this, new StateProtocol() , boat_port ));
+		for(TCPServer s : servers ) {
+				s.start();
+		}
+	}
+	
 	//==================
 	//Getters & Setters
 

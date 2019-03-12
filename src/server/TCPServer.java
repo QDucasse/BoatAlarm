@@ -3,6 +3,7 @@ import java.io.*;
 import java.net.*;
 import java.util.List;
 
+import protocols.IProtocol;
 import users.Subscriber;
 
 
@@ -11,7 +12,7 @@ public class TCPServer extends Thread{
 	//==================
 	//Instance Variables
 	
-	private static int connectionNumber = 0;
+	private static int CONNECTION_NB = 0;
 	
 	private int maxConnect;
 	
@@ -28,22 +29,24 @@ public class TCPServer extends Thread{
 	//==================
 	//Constructors
 	
-	public TCPServer(int unNumeroPort) {        
-		portNumber = unNumeroPort;
-		maxConnect = 10;
+	public TCPServer(int port,int max) {        
+		this.portNumber = port;
+		this.maxConnect = max;
 	} 
+	
+	public TCPServer(int port) {        
+		this(port,10);
+	} 
+	
+	public TCPServer(IContext context,IProtocol protocol, int port) {
+		this(port);
+		this.context = context;
+		this.protocol = protocol;
+	}
 
 	//==================
 	//Setters & Getters
 	
-	public static int getConnectionNumber() {
-		return connectionNumber;
-	}
-
-	public static void setConnectionNumber(int connectionNumber) {
-		TCPServer.connectionNumber = connectionNumber;
-	}
-
 	public int getMaxConnect() {
 		return maxConnect;
 	}
@@ -110,12 +113,12 @@ public class TCPServer extends Thread{
 
 		
 		/* Currently authorizing maxConnect different client connections */
-		while (connectionNumber <= maxConnect) {
+		while (CONNECTION_NB <= maxConnect) {
 			try {
 				System.out.println(" Waiting for connection... " );
 				clientSocket = serverSocket.accept();
-				connectionNumber ++;
-				System.out.println("Current connections: " + connectionNumber);
+				CONNECTION_NB ++;
+				System.out.println("Current connections: " + CONNECTION_NB);
 			} catch (IOException e) {
 				System.out.println("Accept failed: " + serverSocket.getLocalPort() + ", " + e);
 				System.exit(1);
@@ -123,11 +126,11 @@ public class TCPServer extends Thread{
         	/*ServeurSpecifique st = new ServeurSpecifique(clientSocket, this);*/
         	/*st.start();*/
 		}
-		System.out.println("Already " + connectionNumber + " clients. Maximum authorised already reached");
+		System.out.println("Already " + CONNECTION_NB + " clients. Maximum authorised already reached");
 
 		try {
 			serverSocket.close();
-			connectionNumber --;
+			CONNECTION_NB --;
 		} catch (IOException e) {
 			System.out.println("Could not close socket: " + serverSocket.toString());
 		}
