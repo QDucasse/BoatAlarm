@@ -4,7 +4,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
-public class Administrator extends Person {
+public class Administrator extends User {
 	//==================
 	//Instance Variables
 	

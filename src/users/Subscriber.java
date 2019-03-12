@@ -3,14 +3,16 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import boat.Boat;
 
-public class Subscriber extends Person {
+
+public class Subscriber extends User {
 	//==================
 	//Instance Variables
 	
 	private Date subscription_date;
 	//List<String> Emails = new ArrayList<String>();
-	private List<Person> trusted_persons = new ArrayList<Person>();
+	private List<User> trusted_persons = new ArrayList<User>();
 	Boat boat;
 	//==================
 	//Constructors
@@ -37,11 +39,11 @@ public class Subscriber extends Person {
 		this.subscription_date = subscription_date;
 	}
 
-	public List<Person> getTrusted_persons() {
+	public List<User> getTrusted_persons() {
 		return trusted_persons;
 	}
 
-	public void setTrusted_persons(List<Person> trusted_persons) {
+	public void setTrusted_persons(List<User> trusted_persons) {
 		this.trusted_persons = trusted_persons;
 	}
 
