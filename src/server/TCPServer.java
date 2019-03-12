@@ -21,6 +21,10 @@ public class TCPServer extends Thread{
 	
 	private List<Subscriber> subscriberList;
 	
+	private IContext context;
+	
+	private IProtocol protocol;
+	
 	//==================
 	//Constructors
 	
@@ -72,6 +76,22 @@ public class TCPServer extends Thread{
 		this.subscriberList = subscriberList;
 	} 
 	
+	public IContext getContext() {
+		return context;
+	} 
+	
+	public void setContext(IContext context) {
+		this.context = context;
+	} 
+	
+	public IProtocol getProtocol() {
+		return protocol;
+	} 
+	
+	public void setProtocol(IProtocol protocol) {
+		this.protocol = protocol;
+	} 
+
 	//==================
 	//Methods
 	
