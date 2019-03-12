@@ -105,7 +105,7 @@ public class TCPClient {
 		}
 	} 	
 	
-	public String transmitString(String message) {        
+	public String sendString(String message) {        
 		String serverMessage = null;
 		try {
 			System.out.println( "Client request: " + message );
