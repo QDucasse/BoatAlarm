@@ -9,8 +9,8 @@ public class MainAdministratorSimulation {
 
 	public static void main(String[] args) {
 
-			admin = new Administrator("Tanios");
-			admin.simulation();
+//			admin = new Administrator("Tanios");
+//			admin.simulation();
 			//Test Github
 			//Test 2
 	   }

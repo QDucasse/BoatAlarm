@@ -20,7 +20,7 @@ public class UserProtocol implements IProtocol {
 		
 		if ((inputLine = is.readLine()) != null) {
 			String chaines[] = inputLine.split(" ");
-			
+		
 			/* change account name option: changename oldname password newname */
 			if (chaines[0].contentEquals("changename")) {
 				for(Subscriber s : context.getSubscriberList()){

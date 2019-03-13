@@ -16,7 +16,6 @@ public class Subscriber {
 	private String address;
 	private String email;
 	private Date subscription_date;
-	private List<String> emails = new ArrayList<String>();
 	private List<Confidence> trusted_persons = new ArrayList<Confidence>();
 	private Boat boat;
 
@@ -35,7 +34,7 @@ public class Subscriber {
 		this.name			   = name;
 		this.address		   = address;
 		this.trusted_persons.add(conf_person);
-		this.emails.add(email);
+		this.email=email;
 		//this.subscription_date = date;
 		this.subscription_date = new Date();
 				// display time and date
@@ -92,14 +91,6 @@ public class Subscriber {
 
 	public void setSubscription_date(Date subscription_date) {
 		this.subscription_date = subscription_date;
-	}
-
-	public List<String> getEmails() {
-		return emails;
-	}
-
-	public void setEmails(List<String> emails) {
-		this.emails = emails;
 	}
 
 	public List<Confidence> getTrusted_persons() {

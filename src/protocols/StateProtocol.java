@@ -11,6 +11,6 @@ public class StateProtocol implements IProtocol {
 	@Override
 	public String execute(IContext aContext, InputStream anInputStream,
 			OutputStream anOutputStream) {
-		
+		return "";
 	}
 }

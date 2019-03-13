@@ -2,7 +2,7 @@ package automatons;
 
 import client.TCPClient;
 
-public class UserAutomaton {
+public class UserAutomaton implements IAutomaton{
 	//==================
 	//Instance Variables
 
@@ -21,10 +21,12 @@ public class UserAutomaton {
 	//==================
 	//Methods
 	
+	@Override
 	public boolean connection() {
 		return tcpClient.connectToServer();
 	}
 
+	@Override
 	public void deconnection() {
 		this.tcpClient.disconnectFromServer();
 		this.logged=0;
