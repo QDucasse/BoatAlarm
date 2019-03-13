@@ -1,4 +1,4 @@
-package users;
+package automatons;
 
 import client.TCPClient;
 
@@ -21,11 +21,11 @@ public class UserAutomaton {
 	//==================
 	//Methods
 	
-	public boolean connexion() {
+	public boolean connection() {
 		return tcpClient.connectToServer();
 	}
 
-	public void deconnexion() {
+	public void deconnection() {
 		this.tcpClient.disconnectFromServer();
 		this.logged=0;
 	}
