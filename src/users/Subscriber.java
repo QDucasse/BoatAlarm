@@ -9,7 +9,10 @@ import boat.Boat;
 public class Subscriber {
 	//==================
 	//Instance Variables
-	
+	private int id;
+	private int BoatID;
+	private int ConfidenceID;
+	private String subscriberType;
 	private String account;
 	private String password;
 	private String name;
@@ -20,6 +23,7 @@ public class Subscriber {
 	private Boat boat;
 
 	
+	List<Subscriber> subscriberList=new ArrayList<Subscriber>();
 	//==================
 	//Constructors
 	
@@ -29,12 +33,37 @@ public class Subscriber {
 					  int boat_immatriculation, String boat_name, 
 					  String boat_type, String boat_model)
 	{
+		
+		// list_boat = centralSystem.getBoatListe();
+		// prendre l'id le plus grand de la liste 
+//		for (Boat b : list_boat) {
+//			   id = b.getBoatId();
+//			   }
+//		
+		// id = id + 1;
+//this.BoatID = id;
+		
+		// la meme chose pour le Confidence
+		// list_confidence = centralSystem.getListeConfidence();
+		// prendre l'id le plus grand de la liste 
+//		for (Confidence c : list_confidence) {
+//			   id = c.getConfidenceID();
+//			   }
+//		
+		// id = id + 1;
+//this.CondidenceID = id;
+//		
+//*************************************************************************
+// Il faut ajouter dans les constructeur dans Boat et dans Confidence le 
+// truc des id pour les ajouter sur les objet .	
+//**************************************************************************		
+		
 		this.account	       = account;
 		this.password	       = password;
 		this.name			   = name;
 		this.address		   = address;
 		this.trusted_persons.add(conf_person);
-		this.email=email;
+		this.email			   =email;
 		//this.subscription_date = date;
 		this.subscription_date = new Date();
 				// display time and date

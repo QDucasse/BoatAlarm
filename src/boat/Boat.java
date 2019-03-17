@@ -4,6 +4,8 @@ public class Boat{
 	//==================
 	//Instance Variables
 	
+	private int boatID; 	// dans le constructeur il faut prendre l'id le plus grands de la liste des 
+				   	   //  boat ce qui est normalement la dernier dans la liste et ajouter l'id +1 pour le new Boat.
 	private int immatriculation;
 	private String name;
 	private String type;
@@ -17,9 +19,12 @@ public class Boat{
 	
 	public Boat(int immatriculation, String name, String type, String model)
 	{
+	
+		// il faut ajouter la valeur de cette id dans le consructeur
 		this(immatriculation, name, type, model, "0,0", "port", 0);
 	}
 	
+	//il faut ajouter id dans cet constructeur 
 	public Boat(int immatriculation, String name, String type, String model,String position, String place, int state)
 	{
 		this.immatriculation =immatriculation;

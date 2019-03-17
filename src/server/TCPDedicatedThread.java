@@ -18,6 +18,7 @@ public class TCPDedicatedThread extends Thread{
         this.mainServer = aServer;
 
     }
+
     //==================
   	//Getters and Setters
     
