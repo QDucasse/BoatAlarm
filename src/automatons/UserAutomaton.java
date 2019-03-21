@@ -8,14 +8,13 @@ public class UserAutomaton implements IAutomaton{
 
 	private int port = 6668;
 	private TCPClient tcpClient;
-	private int logged;
 	
 	//==================
 	//Constructors
 	
 	public UserAutomaton() {
 		this.tcpClient = new TCPClient("localhost",port);
-		this.logged = 0;
+		//this.logged = 0;
 	}
 	
 	//==================
@@ -29,13 +28,13 @@ public class UserAutomaton implements IAutomaton{
 	@Override
 	public void deconnection() {
 		this.tcpClient.disconnectFromServer();
-		this.logged=0;
+		//this.logged=0;
 	}
 	
 	public void login(String account,String password) {
 		tcpClient.sendString("login " + account +" "+ password);
 		//Verify ??
-		this.logged=1;
+		//this.logged=1;
 	}
 	
 	public void changeAccountName(String account,String oldPassword, String newPassword) {

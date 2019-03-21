@@ -3,7 +3,9 @@ package external;
 import users.Confidence;
 import users.Subscriber;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.Month;
+
 import java.util.Properties;
 import java.util.List;
 
@@ -33,7 +35,7 @@ public class EmailSender {
 										"Quentin Ducasse",
 									    "2 Rue François Verny",
 									    "quentin.ducasse@ensta-bretagne.org", 
-									    new Date(2019,03,18),
+									    LocalDate.of(2014, Month.DECEMBER, 12),
 									    conf_person1,
 										48500,"Le Goëland", 
 										"Voilier", "Catamaran");

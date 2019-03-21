@@ -8,27 +8,30 @@ import protocols.TestProtocol;
 
 import java.util.ArrayList;
 import users.Subscriber;
+import boat.Boat;
 
 public class CentralSystem implements IContext {
 	//==================
 	//Instance Variables
 	
-	private int main_port  = 6666;
-	private int boat_port  = 6667;
-	private int user_port  = 6668;
-	private int admin_port = 6669;
+	private static final int TEST_PORT  = 6666;
+	private static final int BOAT_PORT  = 6667;
+	private static final int USER_PORT  = 6668;
+	private static final int ADMIN_PORT = 6669;
 	public List<TCPServer> servers = new ArrayList<TCPServer>();
 	List<Subscriber> subscriberList=new ArrayList<Subscriber>();
+	List<Boat> boatList=new ArrayList<Boat>();
 	
 	//==================
 	//Constructors
 	
-	public CentralSystem(List<Subscriber> subscriberList) {	
+	public CentralSystem(List<Subscriber> subscriberList, List<Boat> boatList) {	
 		this.subscriberList=subscriberList;
-		servers.add(new TCPServer(this, new TestProtocol() , main_port ));
-		servers.add(new TCPServer(this, new UserProtocol() , user_port ));
-		servers.add(new TCPServer(this, new AdminProtocol() , admin_port ));
-		servers.add(new TCPServer(this, new StateProtocol() , boat_port ));
+		this.boatList = boatList;
+		servers.add(new TCPServer(this, new TestProtocol() , TEST_PORT ));
+		servers.add(new TCPServer(this, new UserProtocol() , USER_PORT ));
+		servers.add(new TCPServer(this, new AdminProtocol() , ADMIN_PORT ));
+		servers.add(new TCPServer(this, new StateProtocol() , BOAT_PORT ));
 		for(TCPServer s : servers ) {
 				s.start();
 		}

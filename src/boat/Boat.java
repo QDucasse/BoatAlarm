@@ -4,8 +4,8 @@ public class Boat{
 	//==================
 	//Instance Variables
 	
-	private int boatID; 	// dans le constructeur il faut prendre l'id le plus grands de la liste des 
-				   	   //  boat ce qui est normalement la dernier dans la liste et ajouter l'id +1 pour le new Boat.
+	private static int boatCounter = 0; 	 
+	private int boatId;
 	private int immatriculation;
 	private String name;
 	private String type;
@@ -19,14 +19,14 @@ public class Boat{
 	
 	public Boat(int immatriculation, String name, String type, String model)
 	{
-	
-		// il faut ajouter la valeur de cette id dans le consructeur
+		// Need to add the global variable instead of 1
 		this(immatriculation, name, type, model, "0,0", "port", 0);
 	}
 	
 	//il faut ajouter id dans cet constructeur 
 	public Boat(int immatriculation, String name, String type, String model,String position, String place, int state)
 	{
+		this.boatId = boatCounter;
 		this.immatriculation =immatriculation;
 		this.name = name;
 		this.type = type;
@@ -34,6 +34,7 @@ public class Boat{
 		this.position = position;
 		this.place = place;
 		this.state = state;
+		boatCounter++;
 	}
 	
 	//==================
@@ -41,6 +42,10 @@ public class Boat{
 	
 	public int getImmatriculation() {
 		return immatriculation;
+	}
+	
+	public int getBoatId() {
+		return boatId;
 	}
 
 	public void setImmatriculation(int immatriculation) {
@@ -55,22 +60,6 @@ public class Boat{
 		this.name = name;
 	}
 
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
-	public String getModel() {
-		return model;
-	}
-
-	public void setModel(String model) {
-		this.model = model;
-	}
-
 	public String getPosition() {
 		return position;
 	}
@@ -79,22 +68,10 @@ public class Boat{
 		this.position = position;
 	}
 
-	public String getPlace() {
-		return place;
-	}
-
-	public void setPlace(String place) {
-		this.place = place;
-	}
-
 	public int getState() {
 		return state;
 	}
-
-	public void setState(int state) {
-		this.state = state;
-	}
-
+	
 	//==================
 	//Other methods
 	

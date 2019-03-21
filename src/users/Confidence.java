@@ -4,17 +4,19 @@ public class Confidence {
 	//==================
 	//Instance Variables
 	//
-	private int confidenceID;
+	private static int confidenceCounter = 0;
+	private int confidenceId;
 	private String email;
 	private int number;
 	
 	//==================
 	//Constructors
 	public Confidence(String e_mail, int num)
-	{
-		
+	{	
+		this.confidenceId = confidenceCounter;
 		this.email=e_mail;
 		this.number=num;
+		confidenceCounter++;
 		// dans le constructeur il faut prendre l'id le plus grands de la liste des 
 		//  confidence ce qui est normalement la dernier dans la liste et ajouter l'id +1 pour le new confidence.
 
@@ -26,6 +28,7 @@ public class Confidence {
 	public String getEmail() {
 		return email;
 	}
+	
 	public void setEmail(String email) {
 		this.email = email;
 	}
@@ -33,8 +36,13 @@ public class Confidence {
 	public int getNumber() {
 		return number;
 	}
+	
 	public void setNumber(int number) {
 		this.number = number;
+	}
+	
+	public int getConfidenceId() {
+		return confidenceId;
 	}
 	
 	//==================

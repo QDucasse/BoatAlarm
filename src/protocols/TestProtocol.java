@@ -29,7 +29,7 @@ public class TestProtocol implements IProtocol {
 				}
 			}
 		} catch ( Exception e) {
-			System.out.println(" Pb d'exception ");
+			System.out.println("Exception caught");
 		}
 		return outputMessage;		
 	}

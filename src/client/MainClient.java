@@ -11,7 +11,7 @@ public class MainClient {
 	//Methods
 	
 	public static void main(String[] args) {
-		TCPClient myClient = new TCPClient("localhost", 6666);
+		TCPClient myClient = new TCPClient("localhost", 6668);
 		myClient.connectToServer();
 	}
 }
