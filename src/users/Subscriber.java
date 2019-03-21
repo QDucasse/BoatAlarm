@@ -13,6 +13,7 @@ public class Subscriber {
 	private int BoatID;
 	private int ConfidenceID;
 	private String subscriberType;
+	private List<String> emailList = new ArrayList<String>();
 	private String account;
 	private String password;
 	private String name;
@@ -122,24 +123,29 @@ public class Subscriber {
 		this.subscription_date = subscription_date;
 	}
 
-	public List<Confidence> getTrusted_persons() {
-		return trusted_persons;
+	public void addTrusted_person(Confidence trusted_person) {
+		trusted_persons.add(trusted_person);
 	}
 
-	public void setTrusted_persons(List<Confidence> trusted_persons) {
-		this.trusted_persons = trusted_persons;
+	public List<Confidence> getTrusted_persons() {
+		return trusted_persons;
 	}
 
 	public Boat getBoat() {
 		return boat;
 	}
 
-	public void setBoat(Boat boat) {
-		this.boat = boat;
-	}
-
 	//==================
 	//Other Methods
+	
+	public List<String> createEmailList() {
+		emailList.add(this.email);
+		for (Confidence c : this.trusted_persons) {
+			emailList.add(c.getEmail());
+		}
+		return emailList;
+	}
+	
 	
 	@Override
 	public String toString() {
