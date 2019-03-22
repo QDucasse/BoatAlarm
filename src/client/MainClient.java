@@ -1,5 +1,7 @@
 package client;
 
+import automatons.UserAutomaton;
+
 public class MainClient {
 	//==================
 	//Instance Variables
@@ -11,7 +13,7 @@ public class MainClient {
 	//Methods
 	
 	public static void main(String[] args) {
-		TCPClient myClient = new TCPClient("localhost", 6668);
-		myClient.connectToServer();
+		UserAutomaton usrTest = new UserAutomaton();
+		usrTest.connection();
 	}
 }
