@@ -28,8 +28,6 @@ public class EmailSender {
 
 		EmailSender emailSender = new EmailSender();
 		Confidence conf_person1 = new Confidence("guillaume.le_boucher@ensta-bretagne.org",000);
-		Confidence conf_person2 = new Confidence("georges.tanios@ensta-bretagne.org",000);
-		Confidence conf_person3 = new Confidence("mahmoud.souayfan@ensta-bretagne.org",000);
 		Subscriber sub = new Subscriber("QDucasse",
 										"1234",
 										"Quentin Ducasse",
@@ -39,8 +37,6 @@ public class EmailSender {
 									    conf_person1,
 										48500,"Le Goëland", 
 										"Voilier", "Catamaran");
-		sub.addTrusted_person(conf_person2);
-		sub.addTrusted_person(conf_person3);
 		emailSender.setMailServerProperties();
 		emailSender.createEmailMessage(sub);
 		emailSender.sendEmail();

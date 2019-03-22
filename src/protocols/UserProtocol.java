@@ -21,11 +21,26 @@ public class UserProtocol implements IProtocol {
 		if ((inputLine = is.readLine()) != null) {
 			String chaines[] = inputLine.split(" ");
 		
-			/* change account name option: changename oldname password newname */
+			/* login option: login accountname password */
+			if (chaines[0].contentEquals("login")) {
+				for(Subscriber s : context.getSubscriberList()){
+					if ((s.getAccount().equals(chaines[1])) & (s.getPassword().equals(chaines[2]))){
+						//Write in the buffer logged in !
+
+						return var;
+					}
+					else {
+						//Write fail in the buffer
+					}
+				}
+				
+			}
+			
+			/* change account name option: changename oldname newname */
 			if (chaines[0].contentEquals("changename")) {
 				for(Subscriber s : context.getSubscriberList()){
 					if (s.getAccount().equals(chaines[1])){
-						var=s.getAccount();
+						s.setAccount(chaines[2]);
 						return var;
 					}	
 				}

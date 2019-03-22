@@ -8,13 +8,14 @@ public class UserAutomaton implements IAutomaton{
 
 	private int port = 6668;
 	private TCPClient tcpClient;
+	int logged;
 	
 	//==================
 	//Constructors
 	
 	public UserAutomaton() {
 		this.tcpClient = new TCPClient("localhost",port);
-		//this.logged = 0;
+		this.logged = 0;
 	}
 	
 	//==================
@@ -28,28 +29,26 @@ public class UserAutomaton implements IAutomaton{
 	@Override
 	public void deconnection() {
 		this.tcpClient.disconnectFromServer();
-		//this.logged=0;
+		this.logged=0;
 	}
 	
 	public void login(String account,String password) {
 		tcpClient.sendString("login " + account +" "+ password);
-		//Verify ??
-		//this.logged=1;
+		this.logged=1;
 	}
 	
-	public void changeAccountName(String account,String oldPassword, String newPassword) {
-		tcpClient.sendString("changename " + account + " " + oldPassword + " " + newPassword);
-		//Verify ??
-	}
-	
-	public void changePassword(String oldAccountName,String password, String newAccountName) {
-		tcpClient.sendString("changepassword " + oldAccountName + " " + password + " " + newAccountName);
+	public void changeAccountName(String oldPassword, String newPassword) {
+		tcpClient.sendString("changename " + oldPassword + " " + newPassword);
 		//Verify ??
 	}
 	
-	public String getBoatInfo(String account,String password, String boatName) {
-		String boatInfo = tcpClient.sendString("getboatinfo " + account + " " + password + " " + boatName);
+	public void changePassword(String oldAccountName, String newAccountName) {
+		tcpClient.sendString("changepassword " + oldAccountName + " " + newAccountName);
 		//Verify ??
+	}
+	
+	public String getBoatInfo(String boatName) {
+		String boatInfo = tcpClient.sendString("getboatinfo " + boatName);
 		return boatInfo;
 	}
 
