@@ -1,11 +1,11 @@
 package server;
-import java.util.List;
 
 import protocols.AdminProtocol;
 import protocols.StateProtocol;
 import protocols.UserProtocol;
 import protocols.TestProtocol;
 
+import java.util.List;
 import java.util.ArrayList;
 import users.Subscriber;
 import boat.Boat;

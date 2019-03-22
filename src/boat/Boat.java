@@ -13,6 +13,7 @@ public class Boat{
 	private String position;
 	private String place;
 	private int state;
+	private SecurityZone boatSecuZone = new SecurityZone(new GPS(0,0),5);
 	
 	//==================
 	//Constructors
@@ -67,9 +68,9 @@ public class Boat{
 	public void setPosition(String position) {
 		this.position = position;
 	}
-
-	public int getState() {
-		return state;
+	
+	public SecurityZone getBoatSecuZone() {
+		return boatSecuZone;
 	}
 	
 	//==================

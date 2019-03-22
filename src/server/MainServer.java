@@ -1,14 +1,19 @@
 package server;
 
+import users.DummySubscriberList;
+import boat.DummyBoatList;
+
 public class MainServer {
 	//==================
 	//Instance Variables
+	private static CentralSystem cs;
 	
 	//==================
 	//Constructors
 	
 	//==================
 	//Methods
+	
 	
 	/**
      * Javadoc comment template 
@@ -21,7 +26,7 @@ public class MainServer {
      */
 	
 	public static void main(String[] args) {
-	
+		cs = new CentralSystem(new DummyBoatList(),new DummySubscriberList());
 		
 	}
 }

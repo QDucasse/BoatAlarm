@@ -1,4 +1,4 @@
-package automatons;
+ package automatons;
 
 import client.TCPClient;
 

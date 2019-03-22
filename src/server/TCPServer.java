@@ -115,7 +115,7 @@ public class TCPServer extends Thread{
 		/* Currently authorizing maxConnect different client connections */
 		while (CONNECTION_NB <= maxConnect) {
 			try {
-				System.out.println(" Waiting for connection... " );
+				System.out.println(" Waiting for connection on port " + portNumber + "..." );
 				clientSocket = serverSocket.accept();
 				CONNECTION_NB ++;
 				System.out.println("Current connections: " + CONNECTION_NB);

@@ -10,7 +10,7 @@ public class Main_Simu {
 		GPS position_bateau = new GPS(0,0);
 		double maxDistance = 4;
 		double Distance_bateau_zone;
-		SecuriteZone Zone_safe = new SecuriteZone(position_bateau, depart_initial,maxDistance);
+		SecurityZone Zone_safe = new SecurityZone(position_bateau, depart_initial,maxDistance);
 		double position_x;
 		double position_y;
 		for (int i = 1; i<6; i++) {

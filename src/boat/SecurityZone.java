@@ -1,6 +1,6 @@
 package boat;
 
-public class SecuriteZone  {
+public class SecurityZone  {
 	//==================
 	//Instance Variables
 
@@ -8,19 +8,20 @@ public class SecuriteZone  {
 	private GPS current_pos;
 	private GPS initial_pos;
 	private double maxDistance;
-    private double d;
+    private double d; //Distance from the center of the security zone
+    private int alarm;
 	
 	//==================
 	//Constructors
 	
-    public SecuriteZone(GPS current_pos, GPS initial_pos, double maxDistance) {
+    public SecurityZone(GPS current_pos, GPS initial_pos, double maxDistance) {
     	this.initial_pos = initial_pos;
     	this.current_pos = current_pos;
     	this.maxDistance= maxDistance;
     }
     
     
-    public SecuriteZone(GPS current_pos, double maxDistance) {
+    public SecurityZone(GPS current_pos, double maxDistance) {
     	this(current_pos, new GPS(0,0), maxDistance);
     }
     
@@ -66,6 +67,11 @@ public class SecuriteZone  {
 		this.d = d;
 	}
 
+	public int getAlarm() {
+		return alarm;
+	}
+
+	
 	//==================
 	//Methods
 	
@@ -75,7 +81,6 @@ public class SecuriteZone  {
 		double current_lon = current_pos.getLon();
 		double initial_lat = initial_pos.getLat();
 		double initial_lon = initial_pos.getLon();
-		System.out.format("pos_courrent : %f,%f  pos_init : %f,%f\n", current_lat,current_lon,initial_lat,initial_lon);
 		double dlat = Math.abs(current_lat - initial_lat);
 		double dlon = Math.abs(current_lon - initial_lon);
 		distance_centre = Math.sqrt(Math.pow(dlat, 2) + Math.pow(dlon, 2));
@@ -84,7 +89,16 @@ public class SecuriteZone  {
 	
 	public void update_position(GPS new_position) {
 		this.setCurrent_pos(new_position);
-		//this.compute_dist();
+		this.d=this.compute_dist();
 	}
+	
+	public void updateAlarm() {
+		if (d>=maxDistance) {
+			alarm = 1;
+		}
+		else {
+			alarm = 0;
+		}
+	};
 	
 }
