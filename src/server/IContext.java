@@ -1,13 +1,16 @@
 package server;
-import users.Subscriber;
 
 import java.util.List;
 
+import users.Subscriber;
+
 public interface IContext {
-	//================
-	//Abstract methods
+	// ================
+	// Abstract methods
 	public List<Subscriber> getSubscriberList();
+
 	public void addSubscriber(Subscriber subscriber);
+
 	public void deleteSubscriber(Subscriber subscriber);
-	
+
 }

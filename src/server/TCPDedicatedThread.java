@@ -1,59 +1,36 @@
 package server;
-import java.io.*;
+
+import java.io.IOException;
 import java.net.Socket;
 
-public class TCPDedicatedThread extends Thread{
-	//==================
-	//Instance Variables
+public class TCPDedicatedThread extends Thread {
+	// ==================
+	// Instance Variables
 	private Socket clientSocket;
-	private TCPServer mainServer;	
-	
-	//==================
-	//Constructors
-	
-    public  TCPDedicatedThread(Socket aSocket, TCPServer aServer) {
-    	
-        super("ServeurThread");
-        this.clientSocket = aSocket;
-        this.mainServer = aServer;
+	private TCPServer mainServer;
 
-    }
+	// ==================
+	// Constructors
 
-    //==================
-  	//Getters and Setters
-    
-	public Socket getClientSocket() {
-		return clientSocket;
+	public TCPDedicatedThread(Socket aSocket, TCPServer aServer) {
+
+		super("ServeurThread");
+		this.clientSocket = aSocket;
+		this.mainServer = aServer;
+
 	}
 
-	public void setClientSocket(Socket clientSocket) {
-		this.clientSocket = clientSocket;
-	}
+	// ==================
+	// Other Methods
 
-	public TCPServer getMainServer() {
-		return mainServer;
-	}
- 
-	public void setMainServer(TCPServer mainServer) {
-		this.mainServer = mainServer;
-	}
-    
-	//==================
-	//Other Methods
-    
-    public void run() {
-    	try {
-    		mainServer.getProtocol().execute(mainServer.getContext(), 
-    										 clientSocket.getInputStream(), 
-    										 clientSocket.getOutputStream());
+	public void run() {
+		try {
+			mainServer.getProtocol().execute(mainServer.getContext(), clientSocket.getInputStream(),
+					clientSocket.getOutputStream());
 			System.out.println("Protocol executed");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-    }
-        
+	}
+
 }
-
-
-    
-

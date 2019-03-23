@@ -1,10 +1,11 @@
 package boat;
-public class Boat{
-	
-	//==================
-	//Instance Variables
-	
-	private static int boatCounter = 0; 	 
+
+public class Boat {
+
+	// ==================
+	// Instance Variables
+
+	private static int boatCounter = 0;
 	private int boatId;
 	private int immatriculation;
 	private String name;
@@ -13,22 +14,20 @@ public class Boat{
 	private String position;
 	private String place;
 	private int state;
-	private SecurityZone boatSecuZone = new SecurityZone(new GPS(0,0),5);
-	
-	//==================
-	//Constructors
-	
-	public Boat(int immatriculation, String name, String type, String model)
-	{
+	private SecurityZone boatSecuZone = new SecurityZone(new GPS(0, 0), 5);
+
+	// ==================
+	// Constructors
+
+	public Boat(int immatriculation, String name, String type, String model) {
 		// Need to add the global variable instead of 1
 		this(immatriculation, name, type, model, "0,0", "port", 0);
 	}
-	
-	//il faut ajouter id dans cet constructeur 
-	public Boat(int immatriculation, String name, String type, String model,String position, String place, int state)
-	{
+
+	// il faut ajouter id dans cet constructeur
+	public Boat(int immatriculation, String name, String type, String model, String position, String place, int state) {
 		this.boatId = boatCounter;
-		this.immatriculation =immatriculation;
+		this.immatriculation = immatriculation;
 		this.name = name;
 		this.type = type;
 		this.model = model;
@@ -37,14 +36,14 @@ public class Boat{
 		this.state = state;
 		boatCounter++;
 	}
-	
-	//==================
-	//Getters and Setters
-	
+
+	// ==================
+	// Getters and Setters
+
 	public int getImmatriculation() {
 		return immatriculation;
 	}
-	
+
 	public int getBoatId() {
 		return boatId;
 	}
@@ -68,24 +67,18 @@ public class Boat{
 	public void setPosition(String position) {
 		this.position = position;
 	}
-	
+
 	public SecurityZone getBoatSecuZone() {
 		return boatSecuZone;
 	}
-	
-	//==================
-	//Other methods
-	
+
+	// ==================
+	// Other methods
+
 	@Override
 	public String toString() {
-		return "Boat [immatriculation=" + immatriculation + ", name=" + name + ", type=" + type
-				+ ", model=" + model + ", position=" + position + ", place=" + place
-				+ ", state=" + state + "]";
+		return "Boat [immatriculation=" + immatriculation + ", name=" + name + ", type=" + type + ", model=" + model
+				+ ", position=" + position + ", place=" + place + ", state=" + state + "]";
 	}
-	
-	
 
-	
-	
-	
 }

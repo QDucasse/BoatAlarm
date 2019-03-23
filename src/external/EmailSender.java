@@ -1,13 +1,9 @@
 package external;
 
-import users.Confidence;
-import users.Subscriber;
-
 import java.time.LocalDate;
 import java.time.Month;
-
-import java.util.Properties;
 import java.util.List;
+import java.util.Properties;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -17,26 +13,22 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import users.Confidence;
+import users.Subscriber;
+
 public class EmailSender {
 
 	Properties emailProperties;
 	Session mailSession;
 	MimeMessage emailMessage;
 
-	public static void main(String args[]) throws AddressException,
-			MessagingException {
+	public static void main(String args[]) throws AddressException, MessagingException {
 
 		EmailSender emailSender = new EmailSender();
-		Confidence conf_person1 = new Confidence("guillaume.le_boucher@ensta-bretagne.org",000);
-		Subscriber sub = new Subscriber("QDucasse",
-										"1234",
-										"Quentin Ducasse",
-									    "2 Rue François Verny",
-									    "quentin.ducasse@ensta-bretagne.org", 
-									    LocalDate.of(2014, Month.DECEMBER, 12),
-									    conf_person1,
-										48500,"Le Goëland", 
-										"Voilier", "Catamaran");
+		Confidence conf_person1 = new Confidence("guillaume.le_boucher@ensta-bretagne.org", 000);
+		Subscriber sub = new Subscriber("QDucasse", "1234", "Quentin Ducasse", "2 Rue François Verny",
+				"quentin.ducasse@ensta-bretagne.org", LocalDate.of(2014, Month.DECEMBER, 12), conf_person1, 48500,
+				"Le Goëland", "Voilier", "Catamaran");
 		emailSender.setMailServerProperties();
 		emailSender.createEmailMessage(sub);
 		emailSender.sendEmail();
@@ -44,7 +36,7 @@ public class EmailSender {
 
 	public void setMailServerProperties() {
 
-		String emailPort = "587"; //gmail's smtp port
+		String emailPort = "587"; // gmail's smtp port
 		emailProperties = System.getProperties();
 		emailProperties.put("mail.smtp.port", emailPort);
 		emailProperties.put("mail.smtp.auth", "true");
@@ -52,14 +44,11 @@ public class EmailSender {
 
 	}
 
-	public void createEmailMessage(Subscriber sub) throws AddressException,
-			MessagingException {
+	public void createEmailMessage(Subscriber sub) throws AddressException, MessagingException {
 		List<String> toEmails = sub.createEmailList();
 		String emailSubject = "URGENT! Your boat alarm has been triggered!";
-		String emailBody = "WARNING"
-						   + '\n' +"Your boat alarm has been triggered, please contact us asap"
-						   + '\n' +"BoatAlarm Corp."
-						   + '\n' + '\n' + '\n' +"Testing the email sending!!";
+		String emailBody = "WARNING" + '\n' + "Your boat alarm has been triggered, please contact us asap" + '\n'
+				+ "BoatAlarm Corp." + '\n' + '\n' + '\n' + "Testing the email sending!!";
 
 		mailSession = Session.getDefaultInstance(emailProperties, null);
 		emailMessage = new MimeMessage(mailSession);
@@ -69,7 +58,7 @@ public class EmailSender {
 		}
 
 		emailMessage.setSubject(emailSubject);
-		//emailMessage.setContent(emailBody, "text/html");//for a html email
+		// emailMessage.setContent(emailBody, "text/html");//for a html email
 		emailMessage.setText(emailBody);// for a text email
 
 	}
@@ -77,7 +66,7 @@ public class EmailSender {
 	public void sendEmail() throws AddressException, MessagingException {
 
 		String emailHost = "smtp.gmail.com";
-		String fromUser = "boatalarmco";//just the id alone without @gmail.com
+		String fromUser = "boatalarmco";// just the id alone without @gmail.com
 		String fromUserEmailPassword = "B04t4l4rm!";
 
 		Transport transport = mailSession.getTransport("smtp");
