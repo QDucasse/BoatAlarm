@@ -7,25 +7,25 @@ public class Boat {
 
 	private static int boatCounter = 0;
 	private int boatId;
-	private int immatriculation;
+	private String immatriculation;
 	private String name;
 	private String type;
 	private String model;
 	private String position;
 	private String place;
-	private int state;
+	private String state;
 	private SecurityZone boatSecuZone = new SecurityZone(new GPS(0, 0), 5);
 
 	// ==================
 	// Constructors
 
-	public Boat(int immatriculation, String name, String type, String model) {
+	public Boat(String immatriculation, String name, String type, String model) {
 		// Need to add the global variable instead of 1
-		this(immatriculation, name, type, model, "0,0", "port", 0);
+		this(immatriculation, name, type, model, "0,0", "port", "not monitoring");
 	}
 
 	// il faut ajouter id dans cet constructeur
-	public Boat(int immatriculation, String name, String type, String model, String position, String place, int state) {
+	public Boat(String immatriculation, String name, String type, String model, String position, String place, String state) {
 		this.boatId = boatCounter;
 		this.immatriculation = immatriculation;
 		this.name = name;
@@ -40,7 +40,7 @@ public class Boat {
 	// ==================
 	// Getters and Setters
 
-	public int getImmatriculation() {
+	public String getImmatriculation() {
 		return immatriculation;
 	}
 
@@ -48,7 +48,7 @@ public class Boat {
 		return boatId;
 	}
 
-	public void setImmatriculation(int immatriculation) {
+	public void setImmatriculation(String immatriculation) {
 		this.immatriculation = immatriculation;
 	}
 
@@ -78,7 +78,7 @@ public class Boat {
 	@Override
 	public String toString() {
 		return "Boat [immatriculation=" + immatriculation + ", name=" + name + ", type=" + type + ", model=" + model
-				+ ", position=" + position + ", place=" + place + ", state=" + state + "]";
+				+ ", place=" + place + ", state=" + state + "]";
 	}
 
 }

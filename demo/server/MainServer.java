@@ -24,7 +24,11 @@ public class MainServer {
 	 */
 
 	public static void main(String[] args) {
-		cs = new CentralSystem(new DummyBoatList(), new DummySubscriberList());
+		DummyBoatList dummyBoat = new DummyBoatList();
+		DummySubscriberList dummySubs = new DummySubscriberList();
+		cs = new CentralSystem(dummySubs.getSubscriberList(),dummyBoat.getBoatList());
+		System.out.println(cs.getSubscriberList());
+		System.out.println(cs.getBoatList());
 
 	}
 }

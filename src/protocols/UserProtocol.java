@@ -17,54 +17,83 @@ public class UserProtocol implements IProtocol {
 		String inputLine;
 		BufferedReader is = new BufferedReader(new InputStreamReader(input));
 		PrintStream os = new PrintStream(output);
-		String var = "";
-
-		if ((inputLine = is.readLine()) != null) {
+		int logged = 0;
+		
+		while ((inputLine = is.readLine()) != null) {
 			String chaines[] = inputLine.split(" ");
 
 			/* login option: login accountname password */
 			if (chaines[0].contentEquals("login")) {
 				for (Subscriber s : context.getSubscriberList()) {
-					if ((s.getAccount().equals(chaines[1])) & (s.getPassword().equals(chaines[2]))) {
-						os.println("Login successful!");
-						os.flush();
-					} else {
-						os.println("Login failed!");
-						os.flush();
-					}
+					if (s.getAccount().equals(chaines[1])) { 		//Check username
+						if (s.getPassword().equals(chaines[2])) {	//Check password
+							System.out.println("Login successful, sending to client");
+							os.println("1 - Login successful!");
+							os.flush();
+							logged = 1;
+						}
+						else {
+							System.out.println("Login failed, sending to client");
+							os.println("0 - Login failed!");
+							os.flush();
+						}
+					} 
 				}
-
+				
 			}
 
 			/* change account name option: changename oldname newname */
 			if (chaines[0].contentEquals("changename")) {
-				for (Subscriber s : context.getSubscriberList()) {
-					if (s.getAccount().equals(chaines[1])) {
-						s.setAccount(chaines[2]); //Account name changed
-						//Write in the buffer
+				if (logged==1){	
+					for (Subscriber s : context.getSubscriberList()) {
+						if (s.getAccount().equals(chaines[1])) {
+							s.setAccount(chaines[2]); //Account name changed
+							os.println("Name changed!");
+							os.flush();
+						}
 					}
 				}
-
+				else {
+					os.println("You need to login first");
+					os.flush();
+				}
 			}
-			/* change password option: changepassword oldpassword newpassword */
+			
+			
+			/* change password option: changepassword accountname oldpassword newpassword */
 			if (chaines[0].contentEquals("changepassword")) {
-				for (Subscriber s : context.getSubscriberList()) {
-					if (s.getAccount().equals(chaines[1])) {
-						s.setPassword(chaines[2]);//Password changed
-						//Write in the buffer
+				if (logged==1){	
+					for (Subscriber s : context.getSubscriberList()) {
+						if (s.getAccount().equals(chaines[1])) {
+							s.setPassword(chaines[2]);//Password changed
+							os.println("Password changed!");
+							os.flush();
+						}
 					}
 				}
-
+				else {
+					os.println("You need to login first");
+					os.flush();
+				}
 			}
 
 			/* get boat info option: getboatinfo */
 			if (chaines[0].contentEquals("getboatinfo boatname")) {
-				for (Boat b : context.getBoatList()) {
-					if (b.getName().equals(chaines[1])) {
-						//Write all infos in the buffer
+				if (logged==1) {	
+					for (Boat b : context.getBoatList()) {
+						if (b.getName().equals(chaines[1])) {
+							//Write all infos in the buffer
+						}
 					}
+				}
+				else {
+					os.println("You need to login first");
+					os.flush();
 				}
 			}
 		}
+		
+		logged = 0;
+		
 	}
 }

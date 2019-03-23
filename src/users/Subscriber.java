@@ -18,8 +18,8 @@ public class Subscriber {
 	private String name;
 	private String address;
 	private String email;
-	private LocalDate subscription_date;
-	private List<Confidence> trusted_persons = new ArrayList<Confidence>();
+	private LocalDate subscriptionDate;
+	private List<Confidence> trustedPersons = new ArrayList<Confidence>();
 	private Boat boat;
 
 	List<Subscriber> subscriberList = new ArrayList<Subscriber>();
@@ -27,7 +27,7 @@ public class Subscriber {
 	// Constructors
 
 	public Subscriber(String account, String password, String name, String address, String email, LocalDate date,
-			String conf_mail, int conf_num, int boat_immatriculation, String boat_name, String boat_type, String boat_model) {
+			String conf_mail, String conf_num, String boat_immatriculation, String boat_name, String boat_type, String boat_model) {
 
 		this.subId = subCounter;
 		this.subscriberType = "subscriber";
@@ -35,10 +35,10 @@ public class Subscriber {
 		this.password = password;
 		this.name = name;
 		this.address = address;
-		this.trusted_persons.add(new Confidence(conf_mail,conf_num));
+		this.trustedPersons.add(new Confidence(conf_mail,conf_num));
 		this.email = email;
 		// this.subscription_date = date;
-		this.subscription_date = LocalDate.now();
+		this.subscriptionDate = LocalDate.now();
 		// display time and date
 		// System.out.printf("%1$s %2$tB %2$td, %2$tY", "Due date:", date);
 		this.boat = new Boat(boat_immatriculation, boat_name, boat_type, boat_model);
@@ -73,12 +73,12 @@ public class Subscriber {
 	}
 
 
-	public void addTrusted_person(Confidence trusted_person) {
-		trusted_persons.add(trusted_person);
+	public void addTrustedPerson(Confidence trusted_person) {
+		trustedPersons.add(trusted_person);
 	}
 
-	public List<Confidence> getTrusted_persons() {
-		return trusted_persons;
+	public List<Confidence> getTrustedPersons() {
+		return trustedPersons;
 	}
 
 
@@ -87,7 +87,7 @@ public class Subscriber {
 
 	public List<String> createEmailList() {
 		emailList.add(this.email);
-		for (Confidence c : this.trusted_persons) {
+		for (Confidence c : this.trustedPersons) {
 			emailList.add(c.getEmail());
 		}
 		return emailList;
@@ -96,7 +96,7 @@ public class Subscriber {
 	@Override
 	public String toString() {
 		return "Abonne [name=" + name + ", address=" + address + ", email=" + email + ", subscription_date="
-				+ subscription_date + ", boat=" + boat + "]";
+				+ subscriptionDate + ", boat=" + boat + "]";
 	}
 
 }

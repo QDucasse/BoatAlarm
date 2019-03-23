@@ -8,14 +8,13 @@ public class UserAutomaton implements IAutomaton {
 
 	private int port = 6668;
 	private TCPClient tcpClient;
-	int logged;
+	String serverAnswer;
 
 	// ==================
 	// Constructors
 
 	public UserAutomaton() {
 		this.tcpClient = new TCPClient("localhost", port);
-		this.logged = 0;
 	}
 
 	// ==================
@@ -29,27 +28,22 @@ public class UserAutomaton implements IAutomaton {
 	@Override
 	public void deconnection() {
 		this.tcpClient.disconnectFromServer();
-		this.logged = 0;
 	}
 
 	public void login(String account, String password) {
-		tcpClient.sendString("login " + account + " " + password);
-		this.logged = 1;
+		serverAnswer=tcpClient.sendString("login " + account + " " + password);
 	}
 
 	public void changeAccountName(String oldAccountName, String newAccountName) {
-		tcpClient.sendString("changename " + oldAccountName + " " + newAccountName);
-		// Verify ??
+		serverAnswer=tcpClient.sendString("changename " + oldAccountName + " " + newAccountName);
 	}
 
-	public void changePassword(String oldPassword, String newPassword) {
-		tcpClient.sendString("changepassword " + oldPassword + " " + newPassword);
-		// Verify ??
+	public void changePassword(String accountName, String oldPassword, String newPassword) {
+		serverAnswer=tcpClient.sendString("changepassword " + accountName  + " " + oldPassword + " " + newPassword);
 	}
 
 	public void getBoatInfo(String boatName) {
-		tcpClient.sendString("getboatinfo " + boatName);
-		//get boat infos
+		serverAnswer=tcpClient.sendString("getboatinfo " + boatName);
 	}
 
 }

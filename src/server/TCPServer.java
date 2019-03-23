@@ -123,8 +123,8 @@ public class TCPServer extends Thread {
 				System.out.println("Accept failed: " + serverSocket.getLocalPort() + ", " + e);
 				System.exit(1);
 			}
-			/* ServeurSpecifique st = new ServeurSpecifique(clientSocket, this); */
-			/* st.start(); */
+			TCPDedicatedThread st = new TCPDedicatedThread(clientSocket, this); 
+			st.start(); 
 		}
 		System.out.println("Already " + CONNECTION_NB + " clients. Maximum authorised already reached");
 

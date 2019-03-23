@@ -17,6 +17,6 @@ public class MainClient {
 		usrTest.connection();
 		usrTest.login("QDucasse", "1234");
 		usrTest.changeAccountName("QDucasse", "ducassqu");
-		usrTest.changePassword("1234", "1111");
+		usrTest.changePassword("ducassqu","1234", "1111");
 	}
 }

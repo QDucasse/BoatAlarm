@@ -7,11 +7,11 @@ public class Confidence {
 	private static int confidenceCounter = 0;
 	private int confidenceId;
 	private String email;
-	private int number;
+	private String number;
 
 	// ==================
 	// Constructors
-	public Confidence(String e_mail, int num) {
+	public Confidence(String e_mail, String num) {
 		this.confidenceId = confidenceCounter;
 		this.email = e_mail;
 		this.number = num;
@@ -33,11 +33,11 @@ public class Confidence {
 		this.email = email;
 	}
 
-	public int getNumber() {
+	public String getNumber() {
 		return number;
 	}
 
-	public void setNumber(int number) {
+	public void setNumber(String number) {
 		this.number = number;
 	}
 
