@@ -1,6 +1,6 @@
 package boat;
 
-public class Main_Simu {
+public class SecurityZoneDemo {
 
 	public static void main(String[] args) {
 

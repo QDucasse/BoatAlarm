@@ -3,7 +3,7 @@ package server;
 import boat.DummyBoatList;
 import users.DummySubscriberList;
 
-public class MainServer {
+public class ServerDemo {
 	// ==================
 	// Instance Variables
 	private static CentralSystem cs;

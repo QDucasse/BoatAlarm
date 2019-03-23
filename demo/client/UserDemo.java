@@ -2,7 +2,7 @@ package client;
 
 import automatons.UserAutomaton;
 
-public class MainClient {
+public class UserDemo {
 	// ==================
 	// Instance Variables
 
