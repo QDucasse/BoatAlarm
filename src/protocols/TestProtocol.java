@@ -11,7 +11,7 @@ import server.IContext;
 
 public class TestProtocol implements IProtocol {
 
-	public String execute(IContext context, InputStream input, OutputStream output) throws IOException {
+	public void execute(IContext context, InputStream input, OutputStream output) throws IOException {
 		String inputLine;
 		BufferedReader is = new BufferedReader(new InputStreamReader(input));
 		PrintStream os = new PrintStream(output);
@@ -31,7 +31,6 @@ public class TestProtocol implements IProtocol {
 		} catch (Exception e) {
 			System.out.println("Exception caught");
 		}
-		return "";
 	}
 
 }

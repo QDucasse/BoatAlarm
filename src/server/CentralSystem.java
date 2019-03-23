@@ -44,10 +44,10 @@ public class CentralSystem implements IContext {
 		return subscriberList;
 	}
 
-	public void setSubscriberList(List<Subscriber> subscriberList) {
-		this.subscriberList = subscriberList;
+	public List<Boat> getBoatList() {
+		return boatList;
 	}
-
+	
 	// ==================
 	// Methods
 

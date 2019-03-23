@@ -5,15 +5,18 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.PrintStream;
 
 import server.IContext;
 import users.Subscriber;
+import boat.Boat;
 
 public class UserProtocol implements IProtocol {
 
-	public String execute(IContext context, InputStream input, OutputStream output) throws IOException {
+	public void execute(IContext context, InputStream input, OutputStream output) throws IOException {
 		String inputLine;
 		BufferedReader is = new BufferedReader(new InputStreamReader(input));
+		PrintStream os = new PrintStream(output);
 		String var = "";
 
 		if ((inputLine = is.readLine()) != null) {
@@ -23,12 +26,11 @@ public class UserProtocol implements IProtocol {
 			if (chaines[0].contentEquals("login")) {
 				for (Subscriber s : context.getSubscriberList()) {
 					if ((s.getAccount().equals(chaines[1])) & (s.getPassword().equals(chaines[2]))) {
-						// Write in the buffer logged in !
-
-						return var;
+						os.println("Login successful!");
+						os.flush();
 					} else {
-						return var;
-						// Write fail in the buffer
+						os.println("Login failed!");
+						os.flush();
 					}
 				}
 
@@ -38,36 +40,31 @@ public class UserProtocol implements IProtocol {
 			if (chaines[0].contentEquals("changename")) {
 				for (Subscriber s : context.getSubscriberList()) {
 					if (s.getAccount().equals(chaines[1])) {
-						s.setAccount(chaines[2]);
-						return var;
+						s.setAccount(chaines[2]); //Account name changed
+						//Write in the buffer
 					}
 				}
 
 			}
-			/* change password option: changepassword accountname oldpassword newpassword */
+			/* change password option: changepassword oldpassword newpassword */
 			if (chaines[0].contentEquals("changepassword")) {
 				for (Subscriber s : context.getSubscriberList()) {
 					if (s.getAccount().equals(chaines[1])) {
-						var = s.getAccount();
-						return var;
+						s.setPassword(chaines[2]);//Password changed
+						//Write in the buffer
 					}
 				}
 
 			}
 
 			/* get boat info option: getboatinfo */
-			if (chaines[0].contentEquals("getboatinfo acountname")) {
-				for (Subscriber s : context.getSubscriberList()) {
-					if (s.getAccount().equals(chaines[1])) {
-						var = s.getAccount();
-						return var;
+			if (chaines[0].contentEquals("getboatinfo boatname")) {
+				for (Boat b : context.getBoatList()) {
+					if (b.getName().equals(chaines[1])) {
+						//Write all infos in the buffer
 					}
 				}
-
 			}
-
 		}
-
-		return "help blabla";
 	}
 }

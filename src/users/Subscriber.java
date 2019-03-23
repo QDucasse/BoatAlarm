@@ -27,7 +27,7 @@ public class Subscriber {
 	// Constructors
 
 	public Subscriber(String account, String password, String name, String address, String email, LocalDate date,
-			Confidence conf_person, int boat_immatriculation, String boat_name, String boat_type, String boat_model) {
+			String conf_mail, int conf_num, int boat_immatriculation, String boat_name, String boat_type, String boat_model) {
 
 		this.subId = subCounter;
 		this.subscriberType = "subscriber";
@@ -35,7 +35,7 @@ public class Subscriber {
 		this.password = password;
 		this.name = name;
 		this.address = address;
-		this.trusted_persons.add(conf_person);
+		this.trusted_persons.add(new Confidence(conf_mail,conf_num));
 		this.email = email;
 		// this.subscription_date = date;
 		this.subscription_date = LocalDate.now();
@@ -72,29 +72,6 @@ public class Subscriber {
 		this.password = password;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
 
 	public void addTrusted_person(Confidence trusted_person) {
 		trusted_persons.add(trusted_person);
@@ -104,9 +81,6 @@ public class Subscriber {
 		return trusted_persons;
 	}
 
-	public Boat getBoat() {
-		return boat;
-	}
 
 	// ==================
 	// Other Methods

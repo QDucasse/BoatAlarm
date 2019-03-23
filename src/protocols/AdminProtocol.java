@@ -11,7 +11,7 @@ import users.Subscriber;
 
 public class AdminProtocol implements IProtocol {
 
-	public String execute(IContext aContext, InputStream input, OutputStream output) throws IOException {
+	public void execute(IContext aContext, InputStream input, OutputStream output) throws IOException {
 		String inputLine;
 		BufferedReader is = new BufferedReader(new InputStreamReader(input));
 		String var = "";
@@ -24,10 +24,9 @@ public class AdminProtocol implements IProtocol {
 				for (Subscriber s : aContext.getSubscriberList()) {
 					if (s.getAccount().equals(chaines[1])) {
 						var = s.getAccount();
-						return "Subscriber added!";
+						//Write in the buffer "Subscriber added!";
 					}
 				}
-
 			}
 
 			/* delete subscriber option: delete accountname */
@@ -35,15 +34,10 @@ public class AdminProtocol implements IProtocol {
 				for (Subscriber s : aContext.getSubscriberList()) {
 					if (s.getAccount().equals(chaines[1])) {
 						aContext.deleteSubscriber(s);
-						return "Subscriber deleted!";
+						//Write in the buffer "Subscriber deleted!";
 					}
 				}
-
 			}
-
 		}
-
-		return "help blabla";
 	}
-
 }

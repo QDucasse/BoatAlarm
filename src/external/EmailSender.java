@@ -13,7 +13,6 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import users.Confidence;
 import users.Subscriber;
 
 public class EmailSender {
@@ -25,10 +24,10 @@ public class EmailSender {
 	public static void main(String args[]) throws AddressException, MessagingException {
 
 		EmailSender emailSender = new EmailSender();
-		Confidence conf_person1 = new Confidence("guillaume.le_boucher@ensta-bretagne.org", 000);
 		Subscriber sub = new Subscriber("QDucasse", "1234", "Quentin Ducasse", "2 Rue François Verny",
-				"quentin.ducasse@ensta-bretagne.org", LocalDate.of(2014, Month.DECEMBER, 12), conf_person1, 48500,
-				"Le Goëland", "Voilier", "Catamaran");
+				"quentin.ducasse@ensta-bretagne.org", LocalDate.of(2014, Month.DECEMBER, 12), 
+				"guillaume.le_boucher@ensta-bretagne.org",0000
+				, 48500,"Le Goëland", "Voilier", "Catamaran");
 		emailSender.setMailServerProperties();
 		emailSender.createEmailMessage(sub);
 		emailSender.sendEmail();

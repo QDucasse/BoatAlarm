@@ -25,8 +25,9 @@ public class TCPDedicatedThread extends Thread {
 
 	public void run() {
 		try {
-			mainServer.getProtocol().execute(mainServer.getContext(), clientSocket.getInputStream(),
-					clientSocket.getOutputStream());
+			mainServer.getProtocol().execute(mainServer.getContext(), 
+											 clientSocket.getInputStream(),
+											 clientSocket.getOutputStream());
 			System.out.println("Protocol executed");
 		} catch (IOException e) {
 			e.printStackTrace();

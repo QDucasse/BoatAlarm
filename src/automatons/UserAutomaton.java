@@ -47,9 +47,9 @@ public class UserAutomaton implements IAutomaton {
 		// Verify ??
 	}
 
-	public String getBoatInfo(String boatName) {
-		String boatInfo = tcpClient.sendString("getboatinfo " + boatName);
-		return boatInfo;
+	public void getBoatInfo(String boatName) {
+		tcpClient.sendString("getboatinfo " + boatName);
+		//get boat infos
 	}
 
 }
