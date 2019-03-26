@@ -80,6 +80,10 @@ public class Subscriber {
 	public List<Confidence> getTrustedPersons() {
 		return trustedPersons;
 	}
+	
+	public Boat getBoat() {
+		return boat;
+	}
 
 
 	// ==================

@@ -8,7 +8,9 @@ import protocols.AdminProtocol;
 import protocols.StateProtocol;
 import protocols.TestProtocol;
 import protocols.UserProtocol;
+import users.Administrator;
 import users.Subscriber;
+
 
 public class CentralSystem implements IContext {
 	// ==================
@@ -21,13 +23,15 @@ public class CentralSystem implements IContext {
 	public List<TCPServer> servers = new ArrayList<TCPServer>();
 	List<Subscriber> subscriberList = new ArrayList<Subscriber>();
 	List<Boat> boatList = new ArrayList<Boat>();
+	List<Administrator> administratorList = new ArrayList<Administrator>();
 
 	// ==================
 	// Constructors
 
-	public CentralSystem(List<Subscriber> subscriberList, List<Boat> boatList) {
+	public CentralSystem(List<Subscriber> subscriberList, List<Boat> boatList,List<Administrator> administratorList) {
 		this.subscriberList = subscriberList;
 		this.boatList = boatList;
+		this.administratorList = administratorList;
 		servers.add(new TCPServer(this, new TestProtocol(), TEST_PORT));
 		servers.add(new TCPServer(this, new UserProtocol(), USER_PORT));
 		servers.add(new TCPServer(this, new AdminProtocol(), ADMIN_PORT));
@@ -48,6 +52,10 @@ public class CentralSystem implements IContext {
 		return boatList;
 	}
 	
+	public List<Administrator> getAdministratorList() {
+		return administratorList;
+	}
+	
 	// ==================
 	// Methods
 
@@ -57,6 +65,21 @@ public class CentralSystem implements IContext {
 
 	public void deleteSubscriber(Subscriber subscriber) {
 		this.subscriberList.remove(subscriber);
+	}
+	
+	public void addBoat(Boat boat) {
+		this.boatList.add(boat);
+	}
+
+	public void deleteBoat(Boat boat) {
+		this.boatList.remove(boat);
+	}
+	
+	public List<Boat> createBoatList() {
+		for (Subscriber s : this.subscriberList) {
+			this.addBoat(s.getBoat());
+		}
+		return boatList;
 	}
 
 }

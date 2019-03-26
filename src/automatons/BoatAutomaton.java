@@ -8,6 +8,8 @@ public class BoatAutomaton implements IAutomaton {
 
 	private int port = 6667;
 	private TCPClient tcpClient;
+	private int alarm = 0;
+	private int monitoring = 0;
 
 	// ==================
 	// Constructors
@@ -29,8 +31,12 @@ public class BoatAutomaton implements IAutomaton {
 		this.tcpClient.disconnectFromServer();
 	}
 
+	public void monitor() {
+
+	}
+	
 	public void triggerMonitoring(String accountName, String boatName) {
-		this.tcpClient.sendString("monitor" + " " + boatName + " " + accountName);
+		this.tcpClient.sendString("triggerMonitor" + " " + boatName + " " + accountName);
 	}
 
 	public void triggerAlarm(String accountName, String boatName) {

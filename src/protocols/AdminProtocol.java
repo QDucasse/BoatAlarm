@@ -7,23 +7,45 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.time.LocalDate;
+import java.util.Arrays;
 
 import server.IContext;
 import users.Subscriber;
+import users.Administrator;
 
 public class AdminProtocol implements IProtocol {
 
-	public void execute(IContext aContext, InputStream input, OutputStream output) throws IOException {
+	public void execute(IContext context, InputStream input, OutputStream output) throws IOException {
 		String inputLine;
 		BufferedReader is = new BufferedReader(new InputStreamReader(input));
 		PrintStream os = new PrintStream(output);
 
 		while ((inputLine = is.readLine()) != null) {
-			String chaines[] = inputLine.split(" ");
-
+			String chaines[] = inputLine.split("_");
+			System.out.println(Arrays.toString(chaines));
+			
+			if (chaines[0].contentEquals("login")) {
+				for (Administrator a : context.getAdministratorList()) {
+					if (a.getAccountName().equals(chaines[1])) { 		//Check username
+						if (a.getPassword().equals(chaines[2])) {	//Check password
+							System.out.println("Login successful, sending to client");
+							os.println("1 - Login successful!");
+							os.flush();
+						}
+						else {
+							System.out.println("Login failed, sending to client");
+							os.println("0 - Login failed!");
+							os.flush();
+						}
+					} 
+				}
+				
+			}
+			
 			/* add subscriber option: add --all infos-- */
 			if (chaines[0].contentEquals("add")) {
-				aContext.addSubscriber(new Subscriber(chaines[1], 				   //Account name
+				//Add unicity verification?
+				context.addSubscriber(new Subscriber(chaines[1], 				   //Account name
 													  chaines[2], 			       //Password
 													  chaines[3],		    	   //Name
 													  chaines[4], 				   //Address
@@ -43,9 +65,9 @@ public class AdminProtocol implements IProtocol {
 
 			/* delete subscriber option: delete accountname */
 			if (chaines[0].contentEquals("delete")) {
-				for (Subscriber s : aContext.getSubscriberList()) {
+				for (Subscriber s : context.getSubscriberList()) {
 					if (s.getAccount().equals(chaines[1])) {
-						aContext.deleteSubscriber(s);
+						context.deleteSubscriber(s);
 						System.out.println("Subscriber deleted, sending confirmation to the client!");
 						os.println("Subscriber deleted!");
 						os.flush();

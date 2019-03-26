@@ -10,7 +10,6 @@ public class AdminAutomaton implements IAutomaton {
 	
 	private int port = 6669;
 	private TCPClient tcpClient;
-	int logged;
 	String serverAnswer;
 	
 	// ==================
@@ -33,18 +32,23 @@ public class AdminAutomaton implements IAutomaton {
 		this.tcpClient.disconnectFromServer();
 	}
 	
+	public void login(String account, String password) {
+		serverAnswer=tcpClient.sendString("login_" + account + "_" + password);
+		//logged?
+	}
+	
 	public void addSubscriber(String account, String password, String name, String address, String email, 
 							  LocalDate date,
-							  String confMail, int confNum, 
-							  int boatImmatriculation, String boatName, String boatType, String boatModel) {
-		serverAnswer=tcpClient.sendString("add " + account + " " + password  + " " + address  + " " + email
-										  + " " + date  
-										  + " " + confMail  + " " + confNum  
-										  + " " + boatImmatriculation + " " + boatName + " " + boatType + " " + boatModel);
+							  String confMail, String confNum, 
+							  String boatImmatriculation, String boatName, String boatType, String boatModel) {
+		serverAnswer=tcpClient.sendString("add_" + account + "_" + password  + "_" + address  + "_" + email
+										  + "_" + date  
+										  + "_" + confMail  + "_" + confNum  
+										  + "_" + boatImmatriculation + "_" + boatName + "_" + boatType + "_" + boatModel);
 	}
 	
 	public void deleteSubscriber(String account) {
-		serverAnswer=tcpClient.sendString("delete " + account);
+		serverAnswer=tcpClient.sendString("delete_" + account);
 	}
 	
 }

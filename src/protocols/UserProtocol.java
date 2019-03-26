@@ -7,9 +7,9 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintStream;
 
+import boat.Boat;
 import server.IContext;
 import users.Subscriber;
-import boat.Boat;
 
 public class UserProtocol implements IProtocol {
 

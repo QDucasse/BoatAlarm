@@ -1,48 +1,38 @@
 package users;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Administrator {
 	// ==================
 	// Instance Variables
 
-	private int choice;
-
-	List<Subscriber> subscriberList;
-
+	private String accountName;
+	private String password;
+	
 	// ==================
 	// Constructors
 
-	public Administrator(List<Subscriber> subscriberList, int choice) {
-		this.subscriberList = subscriberList;
-		this.choice = 0;
+	public Administrator(String accountName, String password) {
+		this.accountName = accountName;
+		this.password = password;
 	}
-
-	public Administrator() {
-		this.subscriberList = new ArrayList<Subscriber>();
-		this.choice = 0;
-	}
-
-	public Administrator(int choice) {
-		this.choice = choice;
-
-	}
-
 	// ==================
-	// Getters and Setters
-
-	public int getChoice() {
-		return choice;
+	// Getters & Setters
+	
+	public String getAccountName() {
+		return accountName;
 	}
-
-	public void setChoice(int choice) {
-		this.choice = choice;
+	
+	public String getPassword() {
+		return password;
 	}
-
-	@Override
-	public String toString() {
-		return "Administrateur [subscriberList=" + subscriberList + "]";
+	
+	
+	// ==================
+	// Other methods
+	
+	public int isAdmin() {
+		return 1;
 	}
-
+	
+	
+	
 }

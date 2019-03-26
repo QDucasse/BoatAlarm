@@ -2,6 +2,7 @@ package server;
 
 import boat.DummyBoatList;
 import users.DummySubscriberList;
+import users.DummyAdminList;
 
 public class ServerDemo {
 	// ==================
@@ -24,9 +25,10 @@ public class ServerDemo {
 	 */
 
 	public static void main(String[] args) {
-		DummyBoatList dummyBoat = new DummyBoatList();
+		DummyBoatList dummyBoats = new DummyBoatList();
 		DummySubscriberList dummySubs = new DummySubscriberList();
-		cs = new CentralSystem(dummySubs.getSubscriberList(),dummyBoat.getBoatList());
+		DummyAdminList dummyAdmins = new DummyAdminList();
+		cs = new CentralSystem(dummySubs.getSubscriberList(),dummyBoats.getBoatList(),dummyAdmins.getAdministratorList());
 		System.out.println(cs.getSubscriberList());
 		System.out.println(cs.getBoatList());
 
