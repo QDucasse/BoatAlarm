@@ -48,12 +48,25 @@ public class Subscriber {
 	// ==================
 	// Getters and Setters
 
-	public int getSubId() {
-		return subId;
-	}
 
 	public String getSubscriberType() {
 		return subscriberType;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	public String getEmail() {
+		return email;
+	}
+
+	public LocalDate getSubscriptionDate() {
+		return subscriptionDate;
+	}
+	
+	public String getAddress() {
+		return address;
 	}
 
 	public String getAccount() {
@@ -83,6 +96,10 @@ public class Subscriber {
 	
 	public Boat getBoat() {
 		return boat;
+	}
+	
+	public int getSubId() {
+		return subId;
 	}
 
 

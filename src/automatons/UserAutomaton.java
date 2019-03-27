@@ -9,10 +9,10 @@ public class UserAutomaton implements IAutomaton {
 	private int port = 6668;
 	private TCPClient tcpClient;
 	String serverAnswer;
-
+	
 	// ==================
 	// Constructors
-
+	
 	public UserAutomaton() {
 		this.tcpClient = new TCPClient("localhost", port);
 	}

@@ -47,6 +47,14 @@ public class Boat {
 	public int getBoatId() {
 		return boatId;
 	}
+	
+	public String getType() {
+		return type;
+	}
+	
+	public String getModel() {
+		return model;
+	}
 
 	public void setImmatriculation(String immatriculation) {
 		this.immatriculation = immatriculation;

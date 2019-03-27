@@ -3,6 +3,7 @@ package server;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import boat.Boat;
 import protocols.AdminProtocol;
 import protocols.StateProtocol;
@@ -24,6 +25,7 @@ public class CentralSystem implements IContext {
 	List<Subscriber> subscriberList = new ArrayList<Subscriber>();
 	List<Boat> boatList = new ArrayList<Boat>();
 	List<Administrator> administratorList = new ArrayList<Administrator>();
+
 
 	// ==================
 	// Constructors
@@ -58,22 +60,6 @@ public class CentralSystem implements IContext {
 	
 	// ==================
 	// Methods
-
-	public void addSubscriber(Subscriber subscriber) {
-		this.subscriberList.add(subscriber);
-	}
-
-	public void deleteSubscriber(Subscriber subscriber) {
-		this.subscriberList.remove(subscriber);
-	}
-	
-	public void addBoat(Boat boat) {
-		this.boatList.add(boat);
-	}
-
-	public void deleteBoat(Boat boat) {
-		this.boatList.remove(boat);
-	}
 	
 	public List<Boat> createBoatList() {
 		for (Subscriber s : this.subscriberList) {
@@ -81,5 +67,39 @@ public class CentralSystem implements IContext {
 		}
 		return boatList;
 	}
+	
+	@Override
+	public void addSubscriber(Subscriber subscriber) {
+		this.subscriberList.add(subscriber);
+	}
+
+	@Override
+	public void deleteSubscriber(Subscriber subscriber) {
+		this.subscriberList.remove(subscriber);
+	}
+	
+	@Override
+	public void addBoat(Boat boat) {
+		this.boatList.add(boat);
+	}
+
+	@Override
+	public void deleteBoat(Boat boat) {
+		this.boatList.remove(boat);
+	}
+
+
+	@Override
+	public void addAdministrator(Administrator administrator) {
+		this.administratorList.add(administrator);
+		
+	}
+
+	@Override
+	public void deleteAdministrator(Administrator administrator) {
+		this.administratorList.remove(administrator);
+		
+	}
+
 
 }
