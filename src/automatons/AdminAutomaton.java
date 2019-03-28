@@ -28,7 +28,7 @@ public class AdminAutomaton implements IAutomaton {
 	}
 
 	@Override
-	public void deconnection() {
+	public void logout() {
 		this.tcpClient.disconnectFromServer();
 	}
 	

@@ -4,6 +4,6 @@ public interface IAutomaton {
 
 	public boolean connection();
 
-	public void deconnection();
+	public void logout();
 
 }

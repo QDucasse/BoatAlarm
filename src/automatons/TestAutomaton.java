@@ -25,7 +25,7 @@ public class TestAutomaton implements IAutomaton {
 	}
 
 	@Override
-	public void deconnection() {
+	public void logout() {
 		this.tcpClient.disconnectFromServer();
 	}
 	

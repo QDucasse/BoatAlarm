@@ -1,6 +1,7 @@
 package automatons;
 
 import client.TCPClient;
+import boat.GPS;
 
 public class BoatAutomaton implements IAutomaton {
 	// ==================
@@ -8,8 +9,6 @@ public class BoatAutomaton implements IAutomaton {
 
 	private int port = 6667;
 	private TCPClient tcpClient;
-	private int alarm = 0;
-	private int monitoring = 0;
 
 	// ==================
 	// Constructors
@@ -27,14 +26,14 @@ public class BoatAutomaton implements IAutomaton {
 	}
 
 	@Override
-	public void deconnection() {
+	public void logout() {
 		this.tcpClient.disconnectFromServer();
 	}
 
-	public void monitor() {
-
+	public void transmitGPSData(String accountName, String boatName, GPS gpsData) {
+		this.tcpClient.sendString("gpsdata " + accountName + " " + boatName + " " + gpsData.getLat() + " " + gpsData.getLon());
 	}
-	
+/*	
 	public void triggerMonitoring(String accountName, String boatName) {
 		this.tcpClient.sendString("triggerMonitor" + " " + boatName + " " + accountName);
 	}
@@ -46,4 +45,5 @@ public class BoatAutomaton implements IAutomaton {
 	public void stopAlarm(String accountName, String boatName) {
 		this.tcpClient.sendString("stopalarm" + " " + boatName + " " + accountName);
 	}
+*/
 }

@@ -54,10 +54,12 @@ public class SQLHandler {
 			   
 			   
 			   // Insert Confidence database table : "Confidence" 
-	
-			   Query = "INSERT INTO Boat (Number, Email)"
-					   + "VALUES ('" + s.getTrustedPersons().getNumber() + "','" + s.getTrustedPersons().getEmail() + "')";
-			   
+			   for (Confidence c : s.getTrustedPersons()) {
+				   Query = "INSERT INTO Confidence (Number, Email)"
+						   + "VALUES ('" + c.getNumber() + "','" + c.getEmail() + "')";
+
+			   }
+			  			   
 			   pst = connection.prepareStatement(Query);
 			   pst.executeQuery();
 			   pst.close();
@@ -83,7 +85,6 @@ public class SQLHandler {
 		try 
 		{
 			ResultSet Resultat;
-			
 			
 			String query = "SELECT * FROM subscriber ";
 			
@@ -150,8 +151,8 @@ public class SQLHandler {
 					position = Resultat.getString("boat_position");
 					place = Resultat.getString("boat_place");
 					state = Integer.parseInt(Resultat.getString("boat_state"));
-					boat = new Boat(boatID ,immatriculation, boat_name, boat_type, model, position, place, state);
-					context.addBoat(boat);
+//					boat = new Boat(boatID ,immatriculation, boat_name, boat_type, model, position, place, state);
+//					context.addBoat(boat);
 					
 					//************************** Confidence ***************************
 					query = "SELECT * FROM Confidence WHERE Confidence_id ="+confidenceID;
@@ -159,17 +160,17 @@ public class SQLHandler {
 					Resultat = pst.executeQuery();
 					email_conf = Resultat.getString("Email");
 					number_conf = Integer.parseInt(Resultat.getString("Number"));
-					confidence = new Confidence(confidenceID, email_conf, number_conf);
-					confidenceList.add(confidence);
+//					confidence = new Confidence(confidenceID, email_conf, number_conf);
+//					confidenceList.add(confidence);
 					
 					
 					Resultat.close();
 
 				}
 				
-				subscriber = new Subscriber(subscriberID,account, password, subscriber_name, address, subscriber_email, subscription_date,confidenceID ,email_conf, number_conf, boatID, immatriculation, boat_name, boat_type, model);
+//				subscriber = new Subscriber(subscriberID,account, password, subscriber_name, address, subscriber_email, subscription_date,confidenceID ,email_conf, number_conf, boatID, immatriculation, boat_name, boat_type, model);
 				
-				context.addSubscriber(subscriber);	
+//				context.addSubscriber(subscriber);	
 				
 			}
 			

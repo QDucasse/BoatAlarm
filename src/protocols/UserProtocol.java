@@ -8,11 +8,13 @@ import java.io.OutputStream;
 import java.io.PrintStream;
 
 import boat.Boat;
+import boat.GPS;
 import server.IContext;
 import users.Subscriber;
 
 public class UserProtocol implements IProtocol {
 
+	@Override
 	public void execute(IContext context, InputStream input, OutputStream output) throws IOException {
 		String inputLine;
 		BufferedReader is = new BufferedReader(new InputStreamReader(input));
@@ -39,7 +41,6 @@ public class UserProtocol implements IProtocol {
 						}
 					} 
 				}
-				
 			}
 
 			/* change account name option: changename oldname newname */
@@ -91,6 +92,11 @@ public class UserProtocol implements IProtocol {
 					os.flush();
 				}
 			}
+			
+			if (chaines[0].contentEquals("logout"))
+				logged=0;
+				os.println("Client disconnected!");
+				os.flush();	
 		}
 		
 		logged = 0;

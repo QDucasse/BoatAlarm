@@ -1,5 +1,11 @@
 package boat;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.LocalDate;
+
 public class Boat {
 
 	// ==================
@@ -20,11 +26,9 @@ public class Boat {
 	// Constructors
 
 	public Boat(String immatriculation, String name, String type, String model) {
-		// Need to add the global variable instead of 1
 		this(immatriculation, name, type, model, "0,0", "port", "not monitoring");
 	}
-
-	// il faut ajouter id dans cet constructeur
+	
 	public Boat(String immatriculation, String name, String type, String model, String position, String place, String state) {
 		this.boatId = boatCounter;
 		this.immatriculation = immatriculation;
@@ -47,6 +51,7 @@ public class Boat {
 	public int getBoatId() {
 		return boatId;
 	}
+
 	
 	public String getType() {
 		return type;
@@ -82,6 +87,42 @@ public class Boat {
 
 	// ==================
 	// Other methods
+	
+	public void monitor() {
+		this.state = "monitoring";
+	}
+	
+	public void updatePosition(GPS newPosition) {
+		int alarm = this.boatSecuZone.update_position(newPosition);
+		GPS currentPosition = this.boatSecuZone.getCurrent_pos();
+		this.position = currentPosition.toString();
+		if((alarm==1)&(this.state.contentEquals("not monitoring"))) {
+
+		}
+		else if ((alarm==1)&(this.state.contentEquals("monitoring"))){
+			this.state = "stolen";
+			this.state = "tracking";
+		}
+		else if ((alarm==1)&(this.state.contentEquals("tracking"))) {
+			File file=new File("logs/tracking"+LocalDate.now()+"-"+this.name+".txt");
+			if (!file.exists()){
+				try {
+					file.createNewFile();
+					FileWriter writer = new FileWriter(file);
+					writer.write("[" + LocalDateTime.now() +"]:" + currentPosition.getLat()
+														   +" "  + currentPosition.getLon());
+			        writer.flush();
+			        writer.close();
+				} catch (IOException e) {
+					System.err.println(e);
+				}
+	        }
+		}
+	}
+	
+	public void stopTracking() {
+		this.state = "not monitoring";
+	}
 
 	@Override
 	public String toString() {

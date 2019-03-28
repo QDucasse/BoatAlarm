@@ -6,7 +6,7 @@ import java.util.List;
 
 import boat.Boat;
 import protocols.AdminProtocol;
-import protocols.StateProtocol;
+import protocols.BoatProtocol;
 import protocols.TestProtocol;
 import protocols.UserProtocol;
 import users.Administrator;
@@ -37,7 +37,7 @@ public class CentralSystem implements IContext {
 		servers.add(new TCPServer(this, new TestProtocol(), TEST_PORT));
 		servers.add(new TCPServer(this, new UserProtocol(), USER_PORT));
 		servers.add(new TCPServer(this, new AdminProtocol(), ADMIN_PORT));
-		servers.add(new TCPServer(this, new StateProtocol(), BOAT_PORT));
+		servers.add(new TCPServer(this, new BoatProtocol(), BOAT_PORT));
 		for (TCPServer s : servers) {
 			s.start();
 		}

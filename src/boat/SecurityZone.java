@@ -78,17 +78,18 @@ public class SecurityZone {
 		return distance_centre;
 	}
 
-	public void update_position(GPS new_position) {
+	public int update_position(GPS new_position) {
 		this.setCurrent_pos(new_position);
 		this.d = this.compute_dist();
+		return this.updateAlarm();
 	}
 
-	public void updateAlarm() {
+	public int updateAlarm() {
 		if (d >= maxDistance) {
 			alarm = 1;
-		} else {
-			alarm = 0;
-		}
+			return 1;
+		} 
+		return 0;
 	};
 
 }

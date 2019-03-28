@@ -26,7 +26,8 @@ public class UserAutomaton implements IAutomaton {
 	}
 
 	@Override
-	public void deconnection() {
+	public void logout() {
+		this.tcpClient.sendString("logout");
 		this.tcpClient.disconnectFromServer();
 	}
 

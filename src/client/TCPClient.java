@@ -110,18 +110,4 @@ public class TCPClient {
 		return serverMessage;
 	}
 
-	/*
-	 * // A utiliser pour ne pas deleguer la connexion aux interfaces GUI public
-	 * String transmettreChaineConnexionPonctuelle(String uneChaine) { String
-	 * msgServeur = null; String chaineRetour = "";
-	 * System.out.println("\nClient connexionTransmettreChaine " + uneChaine); if
-	 * (connecterAuServeur() == true) { try { socOut.println(uneChaine);
-	 * socOut.flush(); msgServeur = socIn.readLine(); while( msgServeur != null &&
-	 * msgServeur.length() >0) { chaineRetour += msgServeur + "\n"; msgServeur =
-	 * socIn.readLine(); } System.out.println("Client msgServeur " + chaineRetour);
-	 * deconnecterDuServeur(); } catch (Exception e) {
-	 * System.err.println("Exception lors de la connexion client:  " + e); } } else
-	 * { System.err.println("Connexion echouee"); } return chaineRetour; }
-	 */
-
 }
