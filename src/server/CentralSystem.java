@@ -60,12 +60,17 @@ public class CentralSystem implements IContext {
 	
 	// ==================
 	// Methods
-	
+	@Override
 	public List<Boat> createBoatList() {
 		for (Subscriber s : this.subscriberList) {
 			this.addBoat(s.getBoat());
 		}
 		return boatList;
+	}
+	
+	@Override
+	public void updateBoatList() {
+		this.boatList = this.createBoatList();
 	}
 	
 	@Override

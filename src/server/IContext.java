@@ -26,5 +26,9 @@ public interface IContext {
 	public void addAdministrator(Administrator administrator);
 
 	public void deleteAdministrator(Administrator administrator);
+	
+	public List<Boat> createBoatList();
+	
+	public void updateBoatList();
 
 }

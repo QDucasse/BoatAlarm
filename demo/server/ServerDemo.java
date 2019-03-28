@@ -31,6 +31,5 @@ public class ServerDemo {
 		cs = new CentralSystem(dummySubs.getSubscriberList(),dummyBoats.getBoatList(),dummyAdmins.getAdministratorList());
 		System.out.println(cs.getSubscriberList());
 		System.out.println(cs.getBoatList());
-
 	}
 }

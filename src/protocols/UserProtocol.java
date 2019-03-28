@@ -8,7 +8,6 @@ import java.io.OutputStream;
 import java.io.PrintStream;
 
 import boat.Boat;
-import boat.GPS;
 import server.IContext;
 import users.Subscriber;
 
@@ -92,11 +91,6 @@ public class UserProtocol implements IProtocol {
 					os.flush();
 				}
 			}
-			
-			if (chaines[0].contentEquals("logout"))
-				logged=0;
-				os.println("Client disconnected!");
-				os.flush();	
 		}
 		
 		logged = 0;

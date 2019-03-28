@@ -41,7 +41,7 @@ public class AdminAutomaton implements IAutomaton {
 							  LocalDate date,
 							  String confMail, String confNum, 
 							  String boatImmatriculation, String boatName, String boatType, String boatModel) {
-		serverAnswer=tcpClient.sendString("add_" + account + "_" + password  + "_" + address  + "_" + email
+		serverAnswer=tcpClient.sendString("add_" + account + "_" + password  + "_" + address  + "_" + email + "_" + name
 										  + "_" + date  
 										  + "_" + confMail  + "_" + confNum  
 										  + "_" + boatImmatriculation + "_" + boatName + "_" + boatType + "_" + boatModel);

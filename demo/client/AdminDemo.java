@@ -22,7 +22,7 @@ public class AdminDemo {
 							  LocalDate.now(),
 							  "conf.mail@email.fr","0000", 
 							  "69000", "L'agile","Voilier","Catamaran");
-		adminTest.addSubscriber("LLeRoux", "0000", "Luka Le Roux", "2 Rue François Verny", "luka.le_roux@email.fr", 
+		adminTest.addSubscriber("LLeRoux", "0000", "Luka Le Roux", "2 Rue François Verny", "luka.leroux@email.fr", 
 							  LocalDate.now(),
 							  "conf.mail@email.fr","0000", 
 							  "69001", "Le très agile","Voilier","Catamaran");

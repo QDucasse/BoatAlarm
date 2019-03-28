@@ -13,7 +13,9 @@ public class DummyBoatList {
 		Boat boat2 = new Boat("48501", "L'Agile", "Voilier", "Dériveur");
 		Boat boat3 = new Boat("48502", "Le Solid", "Moteur", "Yacht");
 		Boat boat4 = new Boat("48503", "L'ingénieur Securité", "Moteur", "Yacht");
-
+		
+		boat1.monitor();
+		
 		boatList.add(boat1);
 		boatList.add(boat2);
 		boatList.add(boat3);
