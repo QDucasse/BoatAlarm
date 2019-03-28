@@ -44,8 +44,12 @@ public class UserAutomaton implements IAutomaton {
 		serverAnswer=tcpClient.sendString("changepassword " + accountName  + " " + oldPassword + " " + newPassword);
 	}
 
-	public void getBoatInfo(String boatName) {
-		serverAnswer=tcpClient.sendString("getboatinfo " + boatName);
+	public void getBoatInfo(String accountName, String boatName) {
+		serverAnswer=tcpClient.sendString("getboatinfo " + accountName + " " + boatName);
+	}
+	
+	public void monitor(String accountName,String boatName) {
+		serverAnswer=tcpClient.sendString("monitor " + accountName + " " + boatName);
 	}
 
 }

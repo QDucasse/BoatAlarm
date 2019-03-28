@@ -1,8 +1,9 @@
 package server;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
-
+import java.util.Set;
 
 import boat.Boat;
 import protocols.AdminProtocol;
@@ -10,6 +11,7 @@ import protocols.BoatProtocol;
 import protocols.TestProtocol;
 import protocols.UserProtocol;
 import users.Administrator;
+import users.Confidence;
 import users.Subscriber;
 
 
@@ -24,8 +26,9 @@ public class CentralSystem implements IContext {
 	public List<TCPServer> servers = new ArrayList<TCPServer>();
 	List<Subscriber> subscriberList = new ArrayList<Subscriber>();
 	List<Boat> boatList = new ArrayList<Boat>();
+	List<Confidence> confidenceList = new ArrayList<Confidence>();
 	List<Administrator> administratorList = new ArrayList<Administrator>();
-
+	private final Set<CentralSystemObserver> observerSet;
 
 	// ==================
 	// Constructors
@@ -34,18 +37,31 @@ public class CentralSystem implements IContext {
 		this.subscriberList = subscriberList;
 		this.boatList = boatList;
 		this.administratorList = administratorList;
+		observerSet = new HashSet<>();
 		servers.add(new TCPServer(this, new TestProtocol(), TEST_PORT));
 		servers.add(new TCPServer(this, new UserProtocol(), USER_PORT));
 		servers.add(new TCPServer(this, new AdminProtocol(), ADMIN_PORT));
 		servers.add(new TCPServer(this, new BoatProtocol(), BOAT_PORT));
+		
 		for (TCPServer s : servers) {
 			s.start();
 		}
+		
+	}
+	
+	public CentralSystem(List<Subscriber> subscriberList,List<Administrator> administratorList) {
+		this(subscriberList, new ArrayList<Boat>(),administratorList);
+		this.createBoatList();
+		
 	}
 
 	// ==================
 	// Getters & Setters
 
+	public void addObserver(CentralSystemObserver obs) {
+		observerSet.add(obs);
+	}
+	
 	public List<Subscriber> getSubscriberList() {
 		return subscriberList;
 	}
@@ -62,6 +78,7 @@ public class CentralSystem implements IContext {
 	// Methods
 	@Override
 	public List<Boat> createBoatList() {
+		this.boatList = new ArrayList<Boat>();
 		for (Subscriber s : this.subscriberList) {
 			this.addBoat(s.getBoat());
 		}
@@ -86,6 +103,20 @@ public class CentralSystem implements IContext {
 	@Override
 	public void addBoat(Boat boat) {
 		this.boatList.add(boat);
+		for (CentralSystemObserver obs : observerSet) {
+			obs.notifyNewBoat(boat);
+		}
+	}
+
+	@Override
+	public List<Confidence> getConfidenceList() {
+		return confidenceList;
+	}
+
+	@Override
+	public void addConfidence(Confidence confidence) {
+		this.confidenceList.add(confidence);
+		
 	}
 
 	@Override

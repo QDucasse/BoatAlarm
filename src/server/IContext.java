@@ -3,8 +3,9 @@ package server;
 import java.util.List;
 
 import boat.Boat;
-import users.Subscriber;
 import users.Administrator;
+import users.Confidence;
+import users.Subscriber;
 
 public interface IContext {
 	// ================
@@ -14,6 +15,10 @@ public interface IContext {
 	public List<Boat> getBoatList();
 	
 	public List<Administrator> getAdministratorList();
+	
+	public List<Confidence> getConfidenceList();
+	
+	public void addConfidence(Confidence confidence);
 
 	public void addSubscriber(Subscriber subscriber);
 

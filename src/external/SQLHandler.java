@@ -3,14 +3,15 @@ package external;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDate;
 import java.util.List;
-import java.sql.*;
+
 import javax.swing.JOptionPane;
 
 import boat.Boat;
+import server.IContext;
 import users.Confidence;
 import users.Subscriber;
-import server.IContext;
 
 
 public class SQLHandler {
@@ -96,16 +97,16 @@ public class SQLHandler {
 			Boat boat;
 			Confidence confidence;
 			//varibale de bateau
-			int immatriculation=0;
+			String immatriculation="";
 			String boat_name="";
 			String boat_type ="";
 			String model="";
 			String position="";
 			String place="";
-			int state=0; 
+			String state=""; 
 			// variable confidence
 			String email_conf="";
-			int number_conf=0;
+			String number_conf="";
 			
 			
 			//variable pour le subscriber
@@ -118,7 +119,7 @@ public class SQLHandler {
 			String subscriber_name;
 			String address;
 			String subscriber_email;
-			String subscription_date;
+			LocalDate subscription_date;
 			//Confidence trusted_persons;
 			
 			while(RS.next()) {
@@ -134,7 +135,7 @@ public class SQLHandler {
 				subscriber_name = RS.getString("subscriber_name");
 				address = RS.getString("subscriber_address");
 				subscriber_email = RS.getString("subscriber_mail");
-				subscription_date = RS.getString("subscriber_date");
+				subscription_date = LocalDate.parse(RS.getString("subscriber_date"));
 				//trusted_persons = RS.getString("confidence_id");
 				//subscriber = new Subscriber(subscriberID,account, password, subscriber_name, address, subscriber_email, subscription_date, subscriberType, boatID, confidenceID);
 				if(subscriberType == "user")
@@ -144,33 +145,33 @@ public class SQLHandler {
 					query = "SELECT * FROM Boat WHERE  boat_id ="+boatID;
 					pst = connection.prepareStatement(query);
 					Resultat = pst.executeQuery();
-					immatriculation = Integer.parseInt(Resultat.getString("boat_numero_im"));
+					immatriculation = Resultat.getString("boat_numero_im");
 					boat_name = Resultat.getString("boat_name");
 					boat_type = Resultat.getString("boat_type");
 					model = Resultat.getString("boat_model");
 					position = Resultat.getString("boat_position");
 					place = Resultat.getString("boat_place");
-					state = Integer.parseInt(Resultat.getString("boat_state"));
-//					boat = new Boat(boatID ,immatriculation, boat_name, boat_type, model, position, place, state);
-//					context.addBoat(boat);
+					state = Resultat.getString("boat_state");
+					boat = new Boat(immatriculation, boat_name, boat_type, model, position, place, state);
+					context.addBoat(boat);
 					
 					//************************** Confidence ***************************
 					query = "SELECT * FROM Confidence WHERE Confidence_id ="+confidenceID;
 					pst = connection.prepareStatement(query);
 					Resultat = pst.executeQuery();
 					email_conf = Resultat.getString("Email");
-					number_conf = Integer.parseInt(Resultat.getString("Number"));
-//					confidence = new Confidence(confidenceID, email_conf, number_conf);
-//					confidenceList.add(confidence);
+					number_conf = Resultat.getString("Number");
+					confidence = new Confidence(email_conf, number_conf);
+					context.addConfidence(confidence);
 					
 					
 					Resultat.close();
 
 				}
 				
-//				subscriber = new Subscriber(subscriberID,account, password, subscriber_name, address, subscriber_email, subscription_date,confidenceID ,email_conf, number_conf, boatID, immatriculation, boat_name, boat_type, model);
+				subscriber = new Subscriber(account, password, subscriber_name, address, subscriber_email, subscription_date,email_conf, number_conf, immatriculation, boat_name, boat_type, model);
 				
-//				context.addSubscriber(subscriber);	
+				context.addSubscriber(subscriber);	
 				
 			}
 			

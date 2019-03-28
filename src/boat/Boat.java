@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.LocalDate;
 
+import external.LogWriter;
+
 public class Boat {
 
 	// ==================
@@ -21,6 +23,7 @@ public class Boat {
 	private String place;
 	private String state;
 	private SecurityZone boatSecuZone = new SecurityZone(new GPS(0, 0), 5);
+	private LogWriter logWriter;
 
 	// ==================
 	// Constructors
@@ -38,6 +41,7 @@ public class Boat {
 		this.position = position;
 		this.place = place;
 		this.state = state;
+		this.logWriter = new LogWriter(this.name);
 		boatCounter++;
 	}
 
@@ -73,6 +77,10 @@ public class Boat {
 		this.name = name;
 	}
 
+	public void setState(String state) {
+		this.state = state;
+	}
+	
 	public String getPosition() {
 		return position;
 	}
@@ -104,19 +112,7 @@ public class Boat {
 			this.state = "tracking";
 		}
 		else if ((alarm==1)&(this.state.contentEquals("tracking"))) {
-			File file=new File("logs/tracking"+LocalDate.now()+"-"+this.name+".txt");
-			if (!file.exists()){
-				try {
-					file.createNewFile();
-					FileWriter writer = new FileWriter(file);
-					writer.write("[" + LocalDateTime.now() +"]:" + currentPosition.getLat()
-														   +" "  + currentPosition.getLon());
-			        writer.flush();
-			        writer.close();
-				} catch (IOException e) {
-					System.err.println(e);
-				}
-	        }
+			this.logWriter.writePosition(newPosition);
 		}
 	}
 	

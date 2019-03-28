@@ -7,7 +7,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintStream;
 
-import boat.Boat;
 import server.IContext;
 import users.Subscriber;
 
@@ -78,11 +77,38 @@ public class UserProtocol implements IProtocol {
 			}
 
 			/* get boat info option: getboatinfo */
-			if (chaines[0].contentEquals("getboatinfo boatname")) {
+			if (chaines[0].contentEquals("getboatinfo")) {
 				if (logged==1) {	
-					for (Boat b : context.getBoatList()) {
-						if (b.getName().equals(chaines[1])) {
+					for (Subscriber s : context.getSubscriberList()) {
+						if (s.getAccount().equals(chaines[1])) {
+							if(s.getBoat().getName().equals(chaines[2])){
 							//Write all infos in the buffer
+							}
+						}
+					}
+				}
+				else {
+					os.println("You need to login first");
+					os.flush();
+				}
+			}
+			
+			/* monitor option: monitor boatname */
+			if (chaines[0].contentEquals("monitor")) {
+				if (logged==1){	
+					for (Subscriber s : context.getSubscriberList()) {
+						if (s.getAccount().equals(chaines[1])) {
+							if(s.getBoat().getName().equals(chaines[2])){
+								s.getBoat().setState("monitoring");
+								context.updateBoatList();
+								System.out.println("Boat is now monitoring!");
+								os.println("Your boat is now monitored");
+								os.flush();
+							}else {
+								System.out.println(s.getName()+": No boat named that way!");
+								os.println("You do not own a boat with that name");
+								os.flush();
+							}
 						}
 					}
 				}
