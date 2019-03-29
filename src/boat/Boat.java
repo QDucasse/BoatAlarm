@@ -1,11 +1,5 @@
 package boat;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.LocalDate;
-
 import external.LogWriter;
 
 public class Boat {

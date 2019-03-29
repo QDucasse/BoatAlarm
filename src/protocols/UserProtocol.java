@@ -103,8 +103,7 @@ public class UserProtocol implements IProtocol {
 						if (s.getAccount().equals(chaines[1])) {
 							if(s.getBoat().getName().equals(chaines[2])){
 								s.getBoat().setState("monitoring");
-								//context.updateBoatList();
-								System.out.println("Boat is now monitoring!");
+								System.out.println("Boat is now monitored!");
 								os.println("Your boat is now monitored");
 								os.flush();
 								context.notifyMonitoring(s);

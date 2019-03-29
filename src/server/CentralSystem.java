@@ -93,21 +93,12 @@ public class CentralSystem implements IContext {
 		
 	}
 	
-	
 	@Override
 	public void createBoatList() {
 		this.boatList = new ArrayList<Boat>();
 		for (Subscriber s : this.subscriberList) {
 			addBoat(s.getBoat());
 		}
-	}
-	
-	@Override
-	public void updateBoatList() {
-		for (Boat b : boatList) {
-			deleteBoat(b);
-		}
-		this.createBoatList();
 	}
 	
 	//SubscriberList

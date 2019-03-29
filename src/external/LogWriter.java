@@ -1,6 +1,8 @@
 package external;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -16,12 +18,11 @@ public class LogWriter {
 	}
 	
 	public void writePosition(GPS newPosition) {
-		this.file=new File("logs/tracking"+LocalDate.now()+"-"+this.boatName+".txt");
+		String log = "[" + LocalDateTime.now() +"]:" + newPosition.getLat()+" "  + newPosition.getLon() + "\n";
 		try {
-			writer = new PrintStream(new FileOutputStream(file));
-		} catch (FileNotFoundException e) {
-			System.out.println(e);
+			Files.write(Paths.get("logs/"+this.boatName+"-"+LocalDate.now()+".txt"), log.getBytes());
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
-		writer.println("[" + LocalDateTime.now() +"]:" + newPosition.getLat()+" "  + newPosition.getLon() + "\n");
 	}
 }

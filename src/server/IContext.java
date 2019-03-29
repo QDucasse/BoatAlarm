@@ -35,8 +35,6 @@ public interface IContext {
 	
 	public void createBoatList();
 	
-	public void updateBoatList();
-	
 	public void notifyLogin(Subscriber subscriber);
 	
 	public void notifyMonitoring(Subscriber subscriber);
