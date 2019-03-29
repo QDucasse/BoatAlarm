@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 import boat.Boat;
+import external.SQLHandler;
 import protocols.AdminProtocol;
 import protocols.BoatProtocol;
 import protocols.TestProtocol;
@@ -29,11 +30,14 @@ public class CentralSystem implements IContext {
 	List<Confidence> confidenceList = new ArrayList<Confidence>();
 	List<Administrator> administratorList = new ArrayList<Administrator>();
 	private final Set<CentralSystemObserver> observerSet;
+	private SQLHandler sqlHandler;
 
 	// ==================
 	// Constructors
 
 	public CentralSystem(List<Subscriber> subscriberList, List<Boat> boatList,List<Administrator> administratorList) {
+		sqlHandler = new SQLHandler(this);
+		//TODO Read database
 		this.subscriberList = subscriberList;
 		this.boatList = boatList;
 		this.administratorList = administratorList;
@@ -45,7 +49,6 @@ public class CentralSystem implements IContext {
 		for (TCPServer s : servers) {
 			s.start();
 		}
-		
 	}
 	
 	public CentralSystem(List<Subscriber> subscriberList,List<Administrator> administratorList) {
@@ -76,6 +79,8 @@ public class CentralSystem implements IContext {
 	// ==================
 	// Methods
 	
+	// List Gestion
+	
 	public void initializeLists() {
 		//Trigger notifications
 		List<Subscriber> dataSubs = this.subscriberList;
@@ -90,12 +95,11 @@ public class CentralSystem implements IContext {
 	
 	
 	@Override
-	public List<Boat> createBoatList() {
+	public void createBoatList() {
 		this.boatList = new ArrayList<Boat>();
 		for (Subscriber s : this.subscriberList) {
 			addBoat(s.getBoat());
 		}
-		return boatList;
 	}
 	
 	@Override
@@ -103,8 +107,10 @@ public class CentralSystem implements IContext {
 		for (Boat b : boatList) {
 			deleteBoat(b);
 		}
-		this.boatList = this.createBoatList();
+		this.createBoatList();
 	}
+	
+	//SubscriberList
 	
 	@Override
 	public void addSubscriber(Subscriber subscriber) {
@@ -122,6 +128,8 @@ public class CentralSystem implements IContext {
 		}
 	}
 	
+	//Boat List
+	
 	@Override
 	public void addBoat(Boat boat) {
 		this.boatList.add(boat);
@@ -138,6 +146,8 @@ public class CentralSystem implements IContext {
 		}
 	}
 
+	// ConfidenceList
+	
 	@Override
 	public List<Confidence> getConfidenceList() {
 		return confidenceList;
@@ -148,6 +158,8 @@ public class CentralSystem implements IContext {
 		this.confidenceList.add(confidence);
 		
 	}
+	
+	// AdministratorList
 
 	@Override
 	public void addAdministrator(Administrator administrator) {
@@ -160,6 +172,8 @@ public class CentralSystem implements IContext {
 		this.administratorList.remove(administrator);
 		
 	}
+	
+	// Notifications
 
 	public void notifyLogin(Subscriber subscriber) {
 		for (CentralSystemObserver obs : observerSet) {
@@ -173,11 +187,10 @@ public class CentralSystem implements IContext {
 		}
 	}
 	
-	public void notifyAccountNameChange(Subscriber oldSub, Subscriber newSub) {
+	public void notifyAccountNameChange(String oldSub, String newSub) {
 		for (CentralSystemObserver obs : observerSet) {
-			obs.notifyChangeNameSubscriber(oldSub,newSub);
+			obs.notifyAccountNameChange(oldSub,newSub);
 		}
 	}
-
 
 }

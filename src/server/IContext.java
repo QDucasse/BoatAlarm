@@ -1,7 +1,6 @@
 package server;
 
 import java.util.List;
-import java.util.Set;
 
 import boat.Boat;
 import users.Administrator;
@@ -34,7 +33,7 @@ public interface IContext {
 
 	public void deleteAdministrator(Administrator administrator);
 	
-	public List<Boat> createBoatList();
+	public void createBoatList();
 	
 	public void updateBoatList();
 	
@@ -42,6 +41,6 @@ public interface IContext {
 	
 	public void notifyMonitoring(Subscriber subscriber);
 	
-	public void notifyAccountNameChange(Subscriber oldSub, Subscriber newSub);
+	public void notifyAccountNameChange(String oldSub, String newSub);
 
 }

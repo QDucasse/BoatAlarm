@@ -47,11 +47,11 @@ public class UserProtocol implements IProtocol {
 				if (logged==1){	
 					for (Subscriber s : context.getSubscriberList()) {
 						if (s.getAccount().equals(chaines[1])) {
-							Subscriber oldSub = s;
+							String oldName = s.getAccount();
 							s.setAccount(chaines[2]); //Account name changed
 							os.println("Name changed!");
 							os.flush();
-							context.notifyAccountNameChange(oldSub, s);
+							context.notifyAccountNameChange(oldName, chaines[2]);
 						}
 					}
 				}
@@ -103,7 +103,7 @@ public class UserProtocol implements IProtocol {
 						if (s.getAccount().equals(chaines[1])) {
 							if(s.getBoat().getName().equals(chaines[2])){
 								s.getBoat().setState("monitoring");
-								context.updateBoatList();
+								//context.updateBoatList();
 								System.out.println("Boat is now monitoring!");
 								os.println("Your boat is now monitored");
 								os.flush();

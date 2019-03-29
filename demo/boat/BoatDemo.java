@@ -29,6 +29,12 @@ public class BoatDemo {
 		boatTest.transmitGPSData("ducassqu","LeGoëland",new GPS(6,6));
 		TimeUnit.SECONDS.sleep(1);
 		boatTest.transmitGPSData("ducassqu","LeGoëland",new GPS(7,7));
+		TimeUnit.SECONDS.sleep(1);
+		boatTest.transmitGPSData("ducassqu","LeGoëland",new GPS(8,8));
+		TimeUnit.SECONDS.sleep(1);
+		boatTest.transmitGPSData("ducassqu","LeGoëland",new GPS(9,9));
+		TimeUnit.SECONDS.sleep(1);
+		boatTest.transmitGPSData("ducassqu","LeGoëland",new GPS(10,10));
 	}
 
 
