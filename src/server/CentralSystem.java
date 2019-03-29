@@ -42,7 +42,6 @@ public class CentralSystem implements IContext {
 		servers.add(new TCPServer(this, new UserProtocol(), USER_PORT));
 		servers.add(new TCPServer(this, new AdminProtocol(), ADMIN_PORT));
 		servers.add(new TCPServer(this, new BoatProtocol(), BOAT_PORT));
-		
 		for (TCPServer s : servers) {
 			s.start();
 		}
@@ -76,35 +75,66 @@ public class CentralSystem implements IContext {
 	
 	// ==================
 	// Methods
+	
+	public void initializeLists() {
+		//Trigger notifications
+		List<Subscriber> dataSubs = this.subscriberList;
+		this.subscriberList = new ArrayList<Subscriber>();
+		this.boatList = new ArrayList<Boat>();
+		
+		for (Subscriber s : dataSubs) {
+			this.addSubscriber(s);
+		}
+		
+	}
+	
+	
 	@Override
 	public List<Boat> createBoatList() {
 		this.boatList = new ArrayList<Boat>();
 		for (Subscriber s : this.subscriberList) {
-			this.addBoat(s.getBoat());
+			addBoat(s.getBoat());
 		}
 		return boatList;
 	}
 	
 	@Override
 	public void updateBoatList() {
+		for (Boat b : boatList) {
+			deleteBoat(b);
+		}
 		this.boatList = this.createBoatList();
 	}
 	
 	@Override
 	public void addSubscriber(Subscriber subscriber) {
 		this.subscriberList.add(subscriber);
+		for (CentralSystemObserver obs : observerSet) {
+			obs.notifyAddSubscriber(subscriber);
+		}
 	}
 
 	@Override
 	public void deleteSubscriber(Subscriber subscriber) {
 		this.subscriberList.remove(subscriber);
+		for (CentralSystemObserver obs : observerSet) {
+			obs.notifyDeleteSubscriber(subscriber);
+		}
 	}
 	
 	@Override
 	public void addBoat(Boat boat) {
 		this.boatList.add(boat);
 		for (CentralSystemObserver obs : observerSet) {
-			obs.notifyNewBoat(boat);
+			obs.notifyAddBoat(boat);
+		}
+	}
+	
+	@Override
+	public void deleteBoat(Boat boat) {
+		this.boatList.remove(boat);
+		for (CentralSystemObserver obs : observerSet) {
+			obs.notifyDeleteBoat(boat);
 		}
 	}
 
@@ -120,12 +150,6 @@ public class CentralSystem implements IContext {
 	}
 
 	@Override
-	public void deleteBoat(Boat boat) {
-		this.boatList.remove(boat);
-	}
-
-
-	@Override
 	public void addAdministrator(Administrator administrator) {
 		this.administratorList.add(administrator);
 		
@@ -135,6 +159,24 @@ public class CentralSystem implements IContext {
 	public void deleteAdministrator(Administrator administrator) {
 		this.administratorList.remove(administrator);
 		
+	}
+
+	public void notifyLogin(Subscriber subscriber) {
+		for (CentralSystemObserver obs : observerSet) {
+			obs.notifyNewClientConnection(subscriber);
+		}
+	}
+	
+	public void notifyMonitoring(Subscriber subscriber) {
+		for (CentralSystemObserver obs : observerSet) {
+			obs.notifyNewBoatMonitored(subscriber);
+		}
+	}
+	
+	public void notifyAccountNameChange(Subscriber oldSub, Subscriber newSub) {
+		for (CentralSystemObserver obs : observerSet) {
+			obs.notifyChangeNameSubscriber(oldSub,newSub);
+		}
 	}
 
 

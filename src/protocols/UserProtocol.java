@@ -30,6 +30,7 @@ public class UserProtocol implements IProtocol {
 							System.out.println("Login successful, sending to client");
 							os.println("1 - Login successful!");
 							os.flush();
+							context.notifyLogin(s);
 							logged = 1;
 						}
 						else {
@@ -46,9 +47,11 @@ public class UserProtocol implements IProtocol {
 				if (logged==1){	
 					for (Subscriber s : context.getSubscriberList()) {
 						if (s.getAccount().equals(chaines[1])) {
+							Subscriber oldSub = s;
 							s.setAccount(chaines[2]); //Account name changed
 							os.println("Name changed!");
 							os.flush();
+							context.notifyAccountNameChange(oldSub, s);
 						}
 					}
 				}
@@ -104,6 +107,7 @@ public class UserProtocol implements IProtocol {
 								System.out.println("Boat is now monitoring!");
 								os.println("Your boat is now monitored");
 								os.flush();
+								context.notifyMonitoring(s);
 							}else {
 								System.out.println(s.getName()+": No boat named that way!");
 								os.println("You do not own a boat with that name");

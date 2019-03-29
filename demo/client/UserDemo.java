@@ -18,6 +18,6 @@ public class UserDemo {
 		usrTest.login("QDucasse", "1234");
 		usrTest.changeAccountName("QDucasse", "ducassqu");
 		usrTest.changePassword("ducassqu","1234", "1111");
-		usrTest.monitor("ducassqu", "LeGoëland");
+		//usrTest.monitor("ducassqu", "LeGoëland");
 	}
 }

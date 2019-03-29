@@ -1,6 +1,7 @@
 package server;
 
 import java.util.List;
+import java.util.Set;
 
 import boat.Boat;
 import users.Administrator;
@@ -10,6 +11,7 @@ import users.Subscriber;
 public interface IContext {
 	// ================
 	// Abstract methods
+	
 	public List<Subscriber> getSubscriberList();
 	
 	public List<Boat> getBoatList();
@@ -35,5 +37,11 @@ public interface IContext {
 	public List<Boat> createBoatList();
 	
 	public void updateBoatList();
+	
+	public void notifyLogin(Subscriber subscriber);
+	
+	public void notifyMonitoring(Subscriber subscriber);
+	
+	public void notifyAccountNameChange(Subscriber oldSub, Subscriber newSub);
 
 }
