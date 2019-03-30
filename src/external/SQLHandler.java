@@ -26,13 +26,10 @@ public class SQLHandler {
 	public void updateDataBase(List<Subscriber> SubscriberList)
 	{
 		// TODO : update the subscriber or add new subscriber if the id of the subscriber didn't found in the database
-		int id;
 		String Query;
-		ResultSet Resultat;
 		
 		for (Subscriber s : SubscriberList) {
 			try {			
-			   id = s.getSubId();
 			   PreparedStatement pst;
 			   
 			   // Insert subsriber database into table : "subscriber"
@@ -110,7 +107,6 @@ public class SQLHandler {
 			
 			
 			//variable pour le subscriber
-			int subscriberID;
 			int boatID;
 			int confidenceID;
 			String subscriberType;
@@ -126,7 +122,6 @@ public class SQLHandler {
 				count += 1;
 				
 				//*********************************************************
-				subscriberID = Integer.parseInt(RS.getString("subscriber_id"));
 				boatID = Integer.parseInt(RS.getString("subscriber_boat_id"));
 				confidenceID = Integer.parseInt(RS.getString("confidence_id"));
 				subscriberType = RS.getString("subscriber_type");

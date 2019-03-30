@@ -76,6 +76,11 @@ public class CentralSystem implements IContext {
 		return administratorList;
 	}
 	
+	public SQLHandler getSQLHandler() {
+		return sqlHandler;
+	}
+	
+	
 	// ==================
 	// Methods
 	
@@ -166,22 +171,33 @@ public class CentralSystem implements IContext {
 	
 	// Notifications
 
+	@Override
 	public void notifyLogin(Subscriber subscriber) {
 		for (CentralSystemObserver obs : observerSet) {
 			obs.notifyNewClientConnection(subscriber);
 		}
 	}
 	
+	@Override
 	public void notifyMonitoring(Subscriber subscriber) {
 		for (CentralSystemObserver obs : observerSet) {
 			obs.notifyNewBoatMonitored(subscriber);
 		}
 	}
 	
+	@Override
 	public void notifyAccountNameChange(String oldSub, String newSub) {
 		for (CentralSystemObserver obs : observerSet) {
 			obs.notifyAccountNameChange(oldSub,newSub);
 		}
+	}
+
+	@Override
+	public void notifyStateChange(String boatName,String state) {
+		for (CentralSystemObserver obs : observerSet) {
+			obs.notifyStateChange(boatName,state);
+		}
+		
 	}
 
 }

@@ -66,7 +66,7 @@ public class SecurityZone {
 	// ==================
 	// Methods
 
-	public double compute_dist() {
+	public double computeDist() {
 		double distance_centre;
 		double current_lat = current_pos.getLat();
 		double current_lon = current_pos.getLon();
@@ -78,9 +78,9 @@ public class SecurityZone {
 		return distance_centre;
 	}
 
-	public int update_position(GPS new_position) {
+	public int updatePosition(GPS new_position) {
 		this.setCurrent_pos(new_position);
-		this.d = this.compute_dist();
+		this.d = this.computeDist();
 		return this.updateAlarm();
 	}
 

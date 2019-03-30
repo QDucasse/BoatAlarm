@@ -19,4 +19,6 @@ public interface CentralSystemObserver {
 	
 	public void notifyAccountNameChange(String oldSubscriber,String newSubscriber);
 	
+	public void notifyStateChange(String boatName,String state);
+	
 }

@@ -1,7 +1,7 @@
 package automatons;
 
-import client.TCPClient;
 import boat.GPS;
+import client.TCPClient;
 
 public class BoatAutomaton implements IAutomaton {
 	// ==================

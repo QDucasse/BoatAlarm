@@ -32,8 +32,10 @@ public class UserAutomaton implements IAutomaton {
 		this.tcpClient.disconnectFromServer();
 	}
 
-	public void login(String account, String password) {
+	public int login(String account, String password) {
 		serverAnswer=tcpClient.sendString("login " + account + " " + password);
+		String chaines[] = serverAnswer.split(" ");
+		return Integer.parseInt(chaines[0]);
 	}
 
 	public void changeAccountName(String oldAccountName, String newAccountName) {
@@ -50,6 +52,14 @@ public class UserAutomaton implements IAutomaton {
 	
 	public void monitor(String accountName,String boatName) {
 		serverAnswer=tcpClient.sendString("monitor " + accountName + " " + boatName);
+	}
+	
+	public String getBoatName(String accountName) {
+		return tcpClient.sendString("getboatname " + accountName);
+	}
+	
+	public String getBoatState(String accountName) {
+		return tcpClient.sendString("getboatstate " + accountName);
 	}
 
 }

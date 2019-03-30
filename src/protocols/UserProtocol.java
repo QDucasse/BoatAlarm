@@ -96,6 +96,41 @@ public class UserProtocol implements IProtocol {
 				}
 			}
 			
+			/* get boat name option: getboatname */
+			if (chaines[0].contentEquals("getboatname")) {
+				if (logged==1) {	
+					for (Subscriber s : context.getSubscriberList()) {
+						if (s.getAccount().equals(chaines[1])) {
+							System.out.println("Boat name returned!");
+							os.println(s.getBoat().getName());
+							os.flush();
+						}
+					}
+				}
+				else {
+					os.println("You need to login first");
+					os.flush();
+				}
+			}
+			
+			/* get boat state option: getboatstate */
+			if (chaines[0].contentEquals("getboatstate")) {
+				if (logged==1) {	
+					for (Subscriber s : context.getSubscriberList()) {
+						if (s.getAccount().equals(chaines[1])) {
+							System.out.println("Boat state returned!");
+							os.println(s.getBoat().getState());
+							os.flush();
+						}
+					}
+				}
+				else {
+					os.println("You need to login first");
+					os.flush();
+				}
+			}
+			
+			
 			/* monitor option: monitor boatname */
 			if (chaines[0].contentEquals("monitor")) {
 				if (logged==1){	

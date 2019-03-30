@@ -16,5 +16,7 @@ public class SQLDemo {
 		DummyAdminList dummyAdmins = new DummyAdminList();
 		cs = new CentralSystem(dummySubs.getSubscriberList(),dummyBoats.getBoatList(),dummyAdmins.getAdministratorList());
 		sqlhandler = new SQLHandler(cs);
+		sqlhandler.extraireSubscriber();
+		//Not working
 	}
 }

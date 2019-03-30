@@ -19,8 +19,8 @@ public class SecurityZoneDemo {
 			position_y = position_bateau.getLat();
 			System.out.format("Distance maximale: %f\n", maxDistance);
 			System.out.format("position x : %f ,  position y : %f\n", position_x, position_y);
-			Zone_safe.update_position(position_bateau);
-			Distance_bateau_zone = Zone_safe.compute_dist();
+			Zone_safe.updatePosition(position_bateau);
+			Distance_bateau_zone = Zone_safe.computeDist();
 			System.out.format("Voici la distance entre le bateau et le centre de la zone : %f\n", Distance_bateau_zone);
 			if (Distance_bateau_zone > maxDistance) {
 				System.out.println("Le bateau est sorti de la zone");

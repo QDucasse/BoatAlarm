@@ -71,6 +71,10 @@ public class Boat {
 		this.name = name;
 	}
 
+	public String getState() {
+		return state;
+	}
+	
 	public void setState(String state) {
 		this.state = state;
 	}
@@ -94,20 +98,23 @@ public class Boat {
 		this.state = "monitoring";
 	}
 	
-	public void updatePosition(GPS newPosition) {
-		int alarm = this.boatSecuZone.update_position(newPosition);
+	public String updatePosition(GPS newPosition) {
+		int alarm = this.boatSecuZone.updatePosition(newPosition);
 		GPS currentPosition = this.boatSecuZone.getCurrent_pos();
 		this.position = currentPosition.toString();
 		if((alarm==1)&(this.state.contentEquals("not monitoring"))) {
-
+			return "not monitoring";
 		}
 		else if ((alarm==1)&(this.state.contentEquals("monitoring"))){
 			this.state = "stolen";
 			this.state = "tracking";
+			return "stolen";
 		}
 		else if ((alarm==1)&(this.state.contentEquals("tracking"))) {
 			this.logWriter.writePosition(newPosition);
+			return "tracking";
 		}
+		return "";
 	}
 	
 	public void stopTracking() {

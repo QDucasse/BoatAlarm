@@ -40,5 +40,7 @@ public interface IContext {
 	public void notifyMonitoring(Subscriber subscriber);
 	
 	public void notifyAccountNameChange(String oldSub, String newSub);
+	
+	public void notifyStateChange(String boatName,String state);
 
 }
