@@ -13,13 +13,38 @@ import javax.mail.internet.MimeMessage;
 
 import users.Subscriber;
 
-public class EmailSender {
+/**
+ * <b>EmailSender allows the system to send emails through a gmail account</b>
+ * <p>
+ * An EmailSender instance is characterized by the following :
+ * </p>
+ * <ul>
+ * <li>Properties that characterize the port,authentification,ttls of the
+ * mail</li>
+ * <li>A session to allow the shipment of the email</li>
+ * <li>A message to transfer</li>
+ * </ul>
+ * 
+ * @author Quentin Ducasse
+ */
 
+public class EmailSender {
+	/**
+	 * The properties of the email
+	 */
 	Properties emailProperties;
+	/**
+	 * The session to send the email
+	 */
 	Session mailSession;
+	/**
+	 * The message itself
+	 */
 	MimeMessage emailMessage;
 
-
+	/**
+	 * Sets the different properties of the shipment of the email: port,auth,ttls
+	 */
 
 	public void setMailServerProperties() {
 
@@ -31,11 +56,20 @@ public class EmailSender {
 
 	}
 
+	/**
+	 * Creates the body of the email, the subject and sets the session
+	 * 
+	 * @param sub The receiver of the email (him and the emails within his
+	 *            confidences)
+	 * @throws AddressException   Wrong address
+	 * @throws MessagingException Connection issue
+	 */
+
 	public void createEmailMessage(Subscriber sub) throws AddressException, MessagingException {
 		List<String> toEmails = sub.createEmailList();
 		String emailSubject = "URGENT! Your boat alarm has been triggered!";
-		String emailBody = "WARNING" + '\n' + "Your boat alarm has been triggered, please contact us asap" + '\n'
-				+ "BoatAlarm Corp." + '\n' + '\n' + '\n' + "Testing the email sending!!";
+		String emailBody = "WARNING" + '\n' + "Your boat alarm has been triggered on " + sub.getBoat().getName()
+				+ ", please contact us asap" + '\n' + "BoatAlarm Corp." + '\n';
 
 		mailSession = Session.getDefaultInstance(emailProperties, null);
 		emailMessage = new MimeMessage(mailSession);
@@ -47,8 +81,15 @@ public class EmailSender {
 		emailMessage.setSubject(emailSubject);
 		// emailMessage.setContent(emailBody, "text/html");//for a html email
 		emailMessage.setText(emailBody);// for a text email
-
 	}
+
+	/**
+	 * The actual shipment of the email: Connection to the host, shipment of the
+	 * message then closing the connection
+	 * 
+	 * @throws AddressException   Wrong address
+	 * @throws MessagingException Connection issue
+	 */
 
 	public void sendEmail() throws AddressException, MessagingException {
 
@@ -62,6 +103,21 @@ public class EmailSender {
 		transport.sendMessage(emailMessage, emailMessage.getAllRecipients());
 		transport.close();
 		System.out.println("Email sent successfully.");
+	}
+
+	/**
+	 * Gathering of the previous functions in one with a simple signature
+	 * 
+	 * @param sub The receiver of the email (him and the emails within his
+	 *            confidences)
+	 * @throws AddressException   Wrong address
+	 * @throws MessagingException Connection issue
+	 */
+
+	public void sendEmailToSubscriber(Subscriber sub) throws AddressException, MessagingException {
+		this.setMailServerProperties();
+		this.createEmailMessage(sub);
+		this.sendEmail();
 	}
 
 }

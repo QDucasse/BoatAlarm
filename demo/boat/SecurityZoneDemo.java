@@ -1,5 +1,11 @@
 package boat;
 
+/**
+ * 
+ * @author Guillaume Le Boucher
+ *
+ */
+
 public class SecurityZoneDemo {
 
 	public static void main(String[] args) {

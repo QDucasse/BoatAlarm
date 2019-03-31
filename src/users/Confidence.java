@@ -1,25 +1,54 @@
 package users;
 
+/**
+ * <b>Confidence is the data and behavior of a trusted person in our model</b>
+ * <p>
+ * A Confidence instance is characterized by the following :
+ * </p>
+ * <ul>
+ * <li>An id (for the database)</li>
+ * <li>An email address</li>
+ * <li>A phone number</li>
+ * </ul>
+ * 
+ * @author Quentin Ducasse
+ */
+
 public class Confidence {
 	// ==================
 	// Instance Variables
 	//
 	private static int confidenceCounter = 0;
+	/**
+	 * The id of the trusted person
+	 */
 	private int confidenceId;
+	/**
+	 * The email address of the trusted person
+	 */
 	private String email;
+	/**
+	 * The phone number of the trusted person
+	 */
 	private String number;
 
 	// ==================
 	// Constructors
+	/**
+	 * Confidence constructor
+	 * <p>
+	 * The constructor simply initializes the Confidence with a given email and
+	 * phone number
+	 * </p>
+	 * 
+	 * @param e_mail The email of the trusted person
+	 * @param num    The phone number of the trusted person
+	 */
 	public Confidence(String e_mail, String num) {
 		this.confidenceId = confidenceCounter;
 		this.email = e_mail;
 		this.number = num;
 		confidenceCounter++;
-		// dans le constructeur il faut prendre l'id le plus grands de la liste des
-		// confidence ce qui est normalement la dernier dans la liste et ajouter l'id +1
-		// pour le new confidence.
-
 	}
 
 	// ==================

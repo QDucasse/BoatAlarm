@@ -8,25 +8,65 @@ import java.net.ConnectException;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+/**
+ * <b>TCPClient defines the client that will connect to the Server using the TCP
+ * protocol</b>
+ * <p>
+ * A TCPClient instance is characterized by the following :
+ * </p>
+ * <ul>
+ * <li>A port to plug in</li>
+ * <li>A serverName to refer to</li>
+ * <li>A server socket</li>
+ * <li>An output PrintStream to send data</li>
+ * <li>An input BufferedReader to receive data</li>
+ * </ul>
+ * 
+ * @author Quentin Ducasse
+ */
+
 public class TCPClient {
 
 	// ==================
 	// Instance Variables
-
+	/**
+	 * The port to plug in
+	 */
 	private int port;
-
+	/**
+	 * The server name
+	 */
 	private String serverName;
-
+	/**
+	 * The server socket
+	 */
 	private Socket serverSocket;
-
+	/**
+	 * The output stream
+	 */
 	private PrintStream socOut;
-
+	/**
+	 * The input reader
+	 */
 	private BufferedReader socIn;
 
 	// ==================
 	// Constructors
 
-	/* A client connects to a server identified by a name and a port */
+	/**
+	 * TCPClient Constructor.
+	 * <p>
+	 * Through construction, the TCPClient simply gathers a given port and server
+	 * name
+	 * </p>
+	 * 
+	 * @param serverName The name of the host
+	 * @param port       The port the client will go through
+	 * @see TCPClient
+	 * @see TCPClient#port
+	 * @see TCPClient#serverName
+	 */
+
 	public TCPClient(String serverName, int port) {
 		this.port = port;
 		this.serverName = serverName;
@@ -55,9 +95,14 @@ public class TCPClient {
 		this.serverSocket = serverSocket;
 	}
 
-
 	// ==================
 	// Other Methods
+
+	/**
+	 * Tries to connect to the server
+	 * 
+	 * @return true if connection established, false if not
+	 */
 
 	public boolean connectToServer() {
 		boolean ok = false;
@@ -81,6 +126,10 @@ public class TCPClient {
 		return ok;
 	}
 
+	/**
+	 * Disconnect from the server
+	 */
+
 	public void disconnectFromServer() {
 		try {
 			System.out.println("[TCPClient] Disconnection: " + this.getServerSocket());
@@ -92,6 +141,14 @@ public class TCPClient {
 		}
 	}
 
+	/**
+	 * Sends a message through the output stream and reads the answer
+	 * 
+	 * @param message The message to pass through
+	 * @return serverMessage The server answer
+	 * @see TCPClient#socIn
+	 * @see TCPClient#socOut
+	 */
 	public String sendString(String message) {
 		String serverMessage = null;
 		try {

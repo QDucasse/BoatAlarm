@@ -3,6 +3,13 @@ package boat;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * 
+ * @author Quentin Ducasse
+ *
+ */
+
 public class DummyBoatList {
 	// ==================
 	// Instance Variables

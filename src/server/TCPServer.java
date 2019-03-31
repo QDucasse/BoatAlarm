@@ -3,32 +3,71 @@ package server;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.List;
 
 import protocols.IProtocol;
-import users.Subscriber;
+
+/**
+ * <b>TCPServer is the main part of the system, receiving incoming connections,
+ * holding the data and answering to requests</b>
+ * <p>
+ * A CentralSystem instance is characterized by the following :
+ * </p>
+ * <ul>
+ * <li>A number of current connections</li>
+ * <li>A number of maximum connections</li>
+ * <li>A client socket</li>
+ * <li>A port number</li>
+ * <li>A context</li>
+ * <li>A protocol</li>
+ * </ul>
+ * 
+ * @see IContext
+ * @author Quentin Ducasse
+ */
 
 public class TCPServer extends Thread {
 
 	// ==================
 	// Instance Variables
-
+	/**
+	 * Current number of connections
+	 */
 	private static int CONNECTION_NB = 0;
-
+	/**
+	 * Maximum number of connections
+	 */
 	private int maxConnect;
-
+	/**
+	 * Client socket the connection comes through
+	 */
 	private Socket clientSocket;
-
+	/**
+	 * Port number where the server listens
+	 */
 	private int portNumber;
-
-	private List<Subscriber> subscriberList;
-
+	/**
+	 * The central system interface
+	 */
 	private IContext context;
-
+	/**
+	 * The protocol interface
+	 */
 	private IProtocol protocol;
 
 	// ==================
 	// Constructors
+
+	/**
+	 * TCPServer Constructor.
+	 * <p>
+	 * Through construction, the system is initialized with the port, a max number
+	 * of connections and a protocol
+	 * </p>
+	 * 
+	 * @param port The port number
+	 * @param max  The maximum number of connections
+	 * @see CentralSystem
+	 */
 
 	public TCPServer(int port, int max) {
 		this.portNumber = port;
@@ -48,60 +87,23 @@ public class TCPServer extends Thread {
 	// ==================
 	// Setters & Getters
 
-	public int getMaxConnect() {
-		return maxConnect;
-	}
-
-	public void setMaxConnect(int maxConnect) {
-		this.maxConnect = maxConnect;
-	}
-
-	public Socket getClientSocket() {
-		return clientSocket;
-	}
-
-	public void setClientSocket(Socket clientSocket) {
-		this.clientSocket = clientSocket;
-	}
-
-	public int getPortNumber() {
-		return portNumber;
-	}
-
-	public void setPortNumber(int portNumber) {
-		this.portNumber = portNumber;
-	}
-
-	public List<Subscriber> getSubscriberList() {
-		return subscriberList;
-	}
-
-	public void setSubscriberList(List<Subscriber> subscriberList) {
-		this.subscriberList = subscriberList;
-	}
-
 	public IContext getContext() {
 		return context;
-	}
-
-	public void setContext(IContext context) {
-		this.context = context;
 	}
 
 	public IProtocol getProtocol() {
 		return protocol;
 	}
 
-	public void setProtocol(IProtocol protocol) {
-		this.protocol = protocol;
-	}
-
 	// ==================
 	// Methods
 
-	public String toString() {
-		return "[ServeurTCP] Port : " + portNumber;
-	}
+	/**
+	 * Runs the server on the given port and accepts incoming connection. Each port
+	 * is linked to a protocol and therefore the server launches a
+	 * TCPDedicatedThread alongside the context and the correct protocol to execute
+	 * any requests from the clients
+	 */
 
 	public void run() {
 		ServerSocket serverSocket = null;
@@ -123,8 +125,8 @@ public class TCPServer extends Thread {
 				System.out.println("Accept failed: " + serverSocket.getLocalPort() + ", " + e);
 				System.exit(1);
 			}
-			TCPDedicatedThread st = new TCPDedicatedThread(clientSocket, this); 
-			st.start(); 
+			TCPDedicatedThread st = new TCPDedicatedThread(clientSocket, this);
+			st.start();
 		}
 		System.out.println("Already " + CONNECTION_NB + " clients. Maximum authorised already reached");
 

@@ -8,6 +8,12 @@ import javax.mail.internet.AddressException;
 
 import users.Subscriber;
 
+/**
+ * 
+ * @author Quentin Ducasse
+ *
+ */
+
 public class EmailSenderDemo {
 	
 	public static void main(String args[]) throws AddressException, MessagingException {

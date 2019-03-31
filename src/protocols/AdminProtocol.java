@@ -13,8 +13,26 @@ import server.IContext;
 import users.Administrator;
 import users.Subscriber;
 
+/**
+ * <b>AdminProtocol is the Protocol that knows how to decipher
+ * administrator-related instructions coming from an AdminAutomaton</b>
+ * <p>
+ * AdminProtocol implements the IProtocol and only has one method 'execute' to
+ * decipher the instructions
+ * </p>
+ * 
+ * @see IProtocol
+ * @author Quentin Ducasse
+ */
+
 public class AdminProtocol implements IProtocol {
 
+	/**
+	 * Decipher administrator-related instructions: Login, Add a new subscriber and
+	 * Delete an existing Subscriber
+	 */
+
+	@Override
 	public void execute(IContext context, InputStream input, OutputStream output) throws IOException {
 		String inputLine;
 		BufferedReader is = new BufferedReader(new InputStreamReader(input));
@@ -23,45 +41,43 @@ public class AdminProtocol implements IProtocol {
 		while ((inputLine = is.readLine()) != null) {
 			String chaines[] = inputLine.split("_");
 			System.out.println(Arrays.toString(chaines));
-			
+
 			if (chaines[0].contentEquals("login")) {
 				for (Administrator a : context.getAdministratorList()) {
-					if (a.getAccountName().equals(chaines[1])) { 		//Check username
-						if (a.getPassword().equals(chaines[2])) {	//Check password
+					if (a.getAccountName().equals(chaines[1])) { // Check username
+						if (a.getPassword().equals(chaines[2])) { // Check password
 							System.out.println("Login successful, sending to client");
 							os.println("1 - Login successful!");
 							os.flush();
-						}
-						else {
+						} else {
 							System.out.println("Login failed, sending to client");
 							os.println("0 - Login failed!");
 							os.flush();
 						}
-					} 
+					}
 				}
-				
+
 			}
-			
+
 			/* add subscriber option: add --all infos-- */
 			if (chaines[0].contentEquals("add")) {
-				//Add unicity verification?
-				context.addSubscriber(new Subscriber(chaines[1], 				   //Account name
-													  chaines[2], 			       //Password
-													  chaines[3],		    	   //Name
-													  chaines[4], 				   //Address
-													  chaines[5], 				   //email
-													  LocalDate.parse(chaines[6]), //Subscription date
-													  chaines[7], 				   //Confidence email
-													  chaines[8], 				   //Confidence phone number
-													  chaines[9],				   //Boat immatriculation
-													  chaines[10],				   //Boat name
-													  chaines[11],				   //Boat Type
-													  chaines[12] ));			   //Boat model
+				// Add unicity verification?
+				context.addSubscriber(new Subscriber(chaines[1], // Account name
+						chaines[2], // Password
+						chaines[3], // Name
+						chaines[4], // Address
+						chaines[5], // email
+						LocalDate.parse(chaines[6]), // Subscription date
+						chaines[7], // Confidence email
+						chaines[8], // Confidence phone number
+						chaines[9], // Boat immatriculation
+						chaines[10], // Boat name
+						chaines[11], // Boat Type
+						chaines[12])); // Boat model
 				System.out.println("Subscriber added, sending confirmation to the client!");
 				os.println("Subscriber added!");
 				os.flush();
 			}
-			
 
 			/* delete subscriber option: delete accountname */
 			if (chaines[0].contentEquals("delete")) {

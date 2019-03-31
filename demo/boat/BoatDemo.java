@@ -3,6 +3,12 @@ package boat;
 import automatons.BoatAutomaton;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * 
+ * @author Quentin Ducasse
+ *
+ */
+
 public class BoatDemo {
 	// ==================
 	// Instance Variables
@@ -13,29 +19,19 @@ public class BoatDemo {
 	// ==================
 	// Methods
 
+	public static void movingTide(BoatAutomaton boatTest, String accountName, String boatName)  throws InterruptedException {
+		for (int i=0;i<15; i++) {
+			boatTest.transmitGPSData(accountName,boatName, new GPS(i, i));
+			TimeUnit.SECONDS.sleep(1);
+		}
+	}
+	
 	public static void main(String[] args) throws InterruptedException {
 		BoatAutomaton boatTest = new BoatAutomaton();
 		boatTest.connection();
-		boatTest.transmitGPSData("QDucasse","LeGoëland",new GPS(1,1));
-		TimeUnit.SECONDS.sleep(1);
-		boatTest.transmitGPSData("QDucasse","LeGoëland",new GPS(2,2));
-		TimeUnit.SECONDS.sleep(1);
-		boatTest.transmitGPSData("QDucasse","LeGoëland",new GPS(3,3));
-		TimeUnit.SECONDS.sleep(1);
-		boatTest.transmitGPSData("QDucasse","LeGoëland",new GPS(4,4));
-		TimeUnit.SECONDS.sleep(1);
-		boatTest.transmitGPSData("QDucasse","LeGoëland",new GPS(5,5));
-		TimeUnit.SECONDS.sleep(1);
-		boatTest.transmitGPSData("QDucasse","LeGoëland",new GPS(6,6));
-		TimeUnit.SECONDS.sleep(1);
-		boatTest.transmitGPSData("QDucasse","LeGoëland",new GPS(7,7));
-		TimeUnit.SECONDS.sleep(1);
-		boatTest.transmitGPSData("QDucasse","LeGoëland",new GPS(8,8));
-		TimeUnit.SECONDS.sleep(1);
-		boatTest.transmitGPSData("QDucasse","LeGoëland",new GPS(9,9));
-		TimeUnit.SECONDS.sleep(1);
-		boatTest.transmitGPSData("QDucasse","LeGoëland",new GPS(10,10));
+		movingTide(boatTest,"QDucasse","LeGoëland");
+		//LIGNE A DECOMMENTER POUR LA DEMO!!
+		//movingTide(boatTest,"JChampeau","Brest");
 	}
-
 
 }

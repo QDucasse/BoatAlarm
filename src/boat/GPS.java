@@ -1,8 +1,41 @@
 package boat;
 
+/**
+ * <b>GPS is the model of positioning in our system</b>
+ * <p>
+ * A GPS instance is characterized by the following :
+ * </p>
+ * <ul>
+ * <li>A longitude</li>
+ * <li>A latitude</li>
+ * </ul>
+ * 
+ * @author Quentin Ducasse
+ */
+
 public class GPS {
+	/**
+	 * The longitude
+	 */
 	private double lon;
+	/**
+	 * The latitude
+	 */
 	private double lat;
+
+	/**
+	 * GPS Constructor.
+	 * <p>
+	 * Through construction, the GPS is initialized with the given position
+	 * </p>
+	 * 
+	 * @param lat The given latitude
+	 * @param lon The given longitude
+	 * 
+	 * @see GPS
+	 * @see GPS#lon
+	 * @see GPS#lat
+	 */
 
 	public GPS(double lat, double lon) {
 		this.lat = lat;
